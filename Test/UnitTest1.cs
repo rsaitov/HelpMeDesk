@@ -1,18 +1,23 @@
+using Data;
 using NUnit.Framework;
 
-namespace Test
+namespace Test_Db
 {
-    public class Tests
+    public class MockRepositoryTests
     {
+        IRepository repository;
         [SetUp]
         public void Setup()
         {
+            repository = new MockRepository();
         }
 
         [Test]
-        public void Test1()
+        public void SelectProjects()
         {
-            Assert.Pass();
+            var projects = repository.SelectProjects();
+            Assert.IsNotNull(projects);
+            Assert.IsTrue(projects.Count > 0);
         }
     }
 }
