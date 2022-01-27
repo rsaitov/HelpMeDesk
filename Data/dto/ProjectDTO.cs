@@ -6,8 +6,13 @@ namespace Data
 {
     public class ProjectDTO
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string ShortName { get; set; }
+        public int Id { get; }
+        public string Name { get; }
+
+        public ProjectDTO(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

@@ -2,8 +2,12 @@
 {
     public class TicketStatusDTO
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public bool Final { get; set; }
+        public int Id { get; }
+        public string Name { get; }
+        public TicketStatusDTO(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }
