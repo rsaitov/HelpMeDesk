@@ -1,0 +1,81 @@
+﻿@model TicketViewModel
+<div class="container">
+    <div class="col-md-12 order-md-1">
+
+        <div class="row mt-2">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-3">
+                <label>Проект: </label>
+                <a asp-controller="Project" asp-action="Index" asp-route-id="@Model.Ticket.Project.Id">@Model.Ticket.Project.Name</a>
+            </div>
+            <div class="col-md-3">
+                <label>Заявитель: </label>
+                <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Ticket.Author.Id">@Model.Ticket.Author.Name</a>
+            </div>
+            <div class="col-md-4">
+                <div class="float-right">
+                    <label>Дата создания: </label> @Model.Ticket.CreationDate.ToShortDateString()
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                <h5 class="mb-3">Заявка №@Model.Ticket.Id</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label class="float-right">Статус:</label>
+            </div>
+            <div class="col-md-10">
+                <p>@Model.Ticket.Status.Name</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label class="float-right">Описание:</label>
+            </div>
+            <div class="col-md-10">
+                <p>@Model.Ticket.Description</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label class="float-right">Вложения:</label>
+            </div>
+            <div class="col-md-10">
+                <p>-</p>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row mb-3">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                <h4>Комментарии:</h4>
+            </div>
+        </div>
+
+        @foreach (var comment in Model.Ticket.Comments)
+        {
+            <div class="row mb-3">
+                <div class="col-md-2 mb-0">
+                    <span class="float-right">Иван Иванов:</span>
+                    <span class="float-right">@comment.PublishDate.ToShortDateString() @comment.PublishDate.ToShortTimeString()</span>
+                </div>
+                <div class="col-md-10">
+                    <p>@comment.Comment</p>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

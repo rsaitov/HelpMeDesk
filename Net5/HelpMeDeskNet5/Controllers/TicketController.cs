@@ -28,5 +28,17 @@ namespace HelpMeDeskNet5.Controllers
 
             return View(model);
         }
+
+        [Route("ticket/{id}")]
+        public IActionResult Ticket(int id)
+        {
+            var firstTicket = _service.GetAllTickets().FirstOrDefault(x => x.Id == id);
+            var model = new TicketViewModel
+            {
+                Ticket = firstTicket
+            };
+
+            return View(model);
+        }
     }
 }

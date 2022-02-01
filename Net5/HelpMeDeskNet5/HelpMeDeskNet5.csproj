@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DataNet5\DataNet5.csproj" />
     <ProjectReference Include="..\DomainNet5\DomainNet5.csproj" />
   </ItemGroup>
