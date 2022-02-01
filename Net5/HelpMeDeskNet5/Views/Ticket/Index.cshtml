@@ -1,0 +1,10 @@
+﻿@model TicketListViewModel
+
+<div>
+    @foreach (var ticket in Model.Tickets)
+    {
+        <div>
+            @ticket.Name
+        </div>
+    }
+</div>

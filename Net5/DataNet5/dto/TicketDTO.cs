@@ -5,16 +5,16 @@ namespace Data
 {
     public class TicketDTO
     {
-        public int Id { get; }
-        public int ProjectId { get; }
-        public int AuthorId { get; }
+        public int Id { get; set; }
+        public int ProjectId { get; set; }
+        public int AuthorId { get; set; }
         //public List<UserDTO> Executors{ get;  }
-        public string Name { get; }
-        public string Description { get; }
-        public DateTime CreationDate { get; }
-        public DateTime LastChangedDate { get; }
-        public int StatusId { get; }
-        public TicketOrigin Origin { get; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastChangedDate { get; set; }
+        public int StatusId { get; set; }
+        public TicketOrigin Origin { get; set; }
         //public List<TicketCommentDTO> Comments { get;  }
 
         public TicketDTO(int id, int projectId, int authorId, string name, string description,
@@ -29,6 +29,11 @@ namespace Data
             LastChangedDate = lastChangedDate;
             StatusId = statusId;
             Origin = origin;
+        }
+
+        public TicketDTO()
+        {
+
         }
 
     }

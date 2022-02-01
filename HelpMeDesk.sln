@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataNet5", "Net5\DataNet5\D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainNet5", "Net5\DomainNet5\DomainNet5.csproj", "{D2D4787C-63B2-4EA6-907F-99FDE6B6576B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpMeDeskNet5", "Net5\HelpMeDeskNet5\HelpMeDeskNet5.csproj", "{F3E62D20-1148-4CB3-B93D-FD0B74DCD441}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpMeDeskNet5", "Net5\HelpMeDeskNet5\HelpMeDeskNet5.csproj", "{C2627DDA-D83C-49EC-BCB1-3E76D965D5D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{D2D4787C-63B2-4EA6-907F-99FDE6B6576B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2D4787C-63B2-4EA6-907F-99FDE6B6576B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2D4787C-63B2-4EA6-907F-99FDE6B6576B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F3E62D20-1148-4CB3-B93D-FD0B74DCD441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3E62D20-1148-4CB3-B93D-FD0B74DCD441}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3E62D20-1148-4CB3-B93D-FD0B74DCD441}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3E62D20-1148-4CB3-B93D-FD0B74DCD441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2627DDA-D83C-49EC-BCB1-3E76D965D5D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2627DDA-D83C-49EC-BCB1-3E76D965D5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2627DDA-D83C-49EC-BCB1-3E76D965D5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2627DDA-D83C-49EC-BCB1-3E76D965D5D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
