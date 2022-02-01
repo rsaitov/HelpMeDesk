@@ -1,4 +1,6 @@
-﻿using Domain;
+﻿using Data;
+using Domain;
+using Domain.service;
 using HelpMeDeskNet5.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,14 +12,18 @@ namespace HelpMeDeskNet5.Controllers
 {
     public class TicketController : Controller
     {
+        private IRepository _repository;
+        private IService _service;
+        public TicketController()
+        {
+            _repository = new MockRepository();
+            _service = new Service(_repository);
+        }
         public IActionResult Index()
         {
+            var tickets = _service.GetAllTickets();
             var model = new TicketListViewModel {
-                Tickets = new List<Ticket> {
-                    new Ticket {Name = "Test"},
-                    new Ticket {Name = "Second"},
-                    new Ticket {Name = "Third"},
-                }
+                Tickets = tickets
             };
 
             return View(model);

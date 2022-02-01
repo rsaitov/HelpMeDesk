@@ -1,10 +1,37 @@
 ﻿@model TicketListViewModel
 
-<div>
-    @foreach (var ticket in Model.Tickets)
-    {
-        <div>
-            @ticket.Name
-        </div>
-    }
+<div class="container">
+    <table class="table table-sm table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Проект</th>
+                <th scope="col">Имя</th>
+                @*<th scope="col">Описание</th>*@
+                <th scope="col">Дата создания</th>
+                <th scope="col">Дата изменения</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Источник</th>
+                <th scope="col">Автор</th>
+                <th scope="col">Исполнитель</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model.Tickets)
+            {
+                <tr>
+                    <th scope="row">@ticket.Id</th>
+                    <td>@ticket.ProjectId</td>
+                    <td>@ticket.Name</td>
+                    @*<td>@ticket.Description</td>*@
+                    <td>@ticket.CreationDate</td>
+                    <td>@ticket.LastChangedDate</td>
+                    <td>@ticket.StatusId</td>
+                    <td>@ticket.Origin</td>
+                    <td>@ticket.AuthorId</td>
+                    <td>@ticket.ExecutorId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

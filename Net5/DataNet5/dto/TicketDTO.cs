@@ -15,10 +15,11 @@ namespace Data
         public DateTime LastChangedDate { get; set; }
         public int StatusId { get; set; }
         public TicketOrigin Origin { get; set; }
+        public int ExecutorId { get; set; }
         //public List<TicketCommentDTO> Comments { get;  }
 
         public TicketDTO(int id, int projectId, int authorId, string name, string description,
-            DateTime creationDate, DateTime lastChangedDate, int statusId, TicketOrigin origin)
+            DateTime creationDate, DateTime lastChangedDate, int statusId, TicketOrigin origin, int executorId)
         {
             Id = id;
             ProjectId = projectId;
@@ -29,6 +30,7 @@ namespace Data
             LastChangedDate = lastChangedDate;
             StatusId = statusId;
             Origin = origin;
+            ExecutorId = executorId;
         }
 
         public TicketDTO()

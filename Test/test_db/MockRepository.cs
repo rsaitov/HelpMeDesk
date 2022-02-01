@@ -1,5 +1,6 @@
 using Data;
 using NUnit.Framework;
+using System.Linq;
 
 namespace Test_Db
 {
@@ -17,7 +18,7 @@ namespace Test_Db
         {
             var projects = repository.SelectProjects();
             Assert.IsNotNull(projects);
-            Assert.IsTrue(projects.Count > 0);
+            Assert.IsTrue(projects.Count() > 0);
         }
 
         [Test]
@@ -25,7 +26,7 @@ namespace Test_Db
         {
             var users = repository.SelectUsers();
             Assert.IsNotNull(users);
-            Assert.IsTrue(users.Count > 0);
+            Assert.IsTrue(users.Count() > 0);
         }
 
         [Test]
@@ -33,7 +34,7 @@ namespace Test_Db
         {
             var tickets = repository.SelectTickets();
             Assert.IsNotNull(tickets);
-            Assert.IsTrue(tickets.Count > 0);
+            Assert.IsTrue(tickets.Count() > 0);
         }
 
         [Test]
@@ -41,7 +42,7 @@ namespace Test_Db
         {
             var ticketComments = repository.SelectTicketComments();
             Assert.IsNotNull(ticketComments);
-            Assert.IsTrue(ticketComments.Count > 0);
+            Assert.IsTrue(ticketComments.Count() > 0);
         }
 
         [Test]
@@ -49,7 +50,7 @@ namespace Test_Db
         {
             var ticketStatuses = repository.SelectTicketStatuses();
             Assert.IsNotNull(ticketStatuses);
-            Assert.IsTrue(ticketStatuses.Count > 0);
+            Assert.IsTrue(ticketStatuses.Count() > 0);
         }
     }
 }

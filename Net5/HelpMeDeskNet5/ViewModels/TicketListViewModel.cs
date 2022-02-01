@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Data;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace HelpMeDeskNet5.ViewModels
 {
     public class TicketListViewModel
     {
-        public IEnumerable<Ticket> Tickets { get; set; }
+        public IEnumerable<TicketDTO> Tickets { get; set; }
     }
 }
