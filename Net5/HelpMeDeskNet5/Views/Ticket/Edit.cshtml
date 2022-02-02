@@ -1,0 +1,78 @@
+﻿@model TicketViewModel
+
+<div class="container">
+    <form>
+        <div class="col-md-12 order-md-1">
+            <div class="row mt-2">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-3">
+                    <h3>Новая заявка</h3>
+                </div>
+            </div>
+
+            <div class="row mt-2 form-group">
+                <div class="col-md-2">
+                    <label for="project" class="float-right mt-1">Проект:</label>
+                </div>
+                <div class="col-md-10">
+                    <select class="form-control" id="project">
+                        <option>Janinn Fitness</option>
+                        <option>Zebra Fitness</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <label for="name" class="float-right mt-1">Название:</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="name" class="form-control" placeholder="Название">
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <label for="description" class="float-right">Описание:</label>
+                </div>
+                <div class="col-md-10">
+                    <textarea type="text" rows="3" id="description" class="form-control" placeholder="Описание"></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-2 form-group">
+                <div class="col-md-2">
+                    <label for="priority" class="float-right mt-1">Приоритет:</label>
+                </div>
+                <div class="col-md-10">
+                    <select class="form-control" id="priority">
+                        <option>Низкий</option>
+                        <option>Средний</option>
+                        <option>Высокий</option>
+                        <option>Критический</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <label class="float-right mt-2">Вложения:</label>
+                </div>
+                <div class="col-md-10">
+                    <button class="btn btn-light">
+                        <i class="bi bi-paperclip"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
