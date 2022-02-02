@@ -12,12 +12,10 @@ namespace HelpMeDeskNet5.Controllers
 {
     public class TicketController : Controller
     {
-        private IRepository _repository;
         private IService _service;
-        public TicketController()
+        public TicketController(IService service)
         {
-            _repository = new MockRepository();
-            _service = new Service(_repository);
+            _service = service;
         }
         public IActionResult Index()
         {
