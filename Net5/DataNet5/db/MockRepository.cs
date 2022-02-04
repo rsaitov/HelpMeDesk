@@ -72,5 +72,18 @@ Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. ";
         public IEnumerable<TicketStatusDTO> SelectTicketStatuses() => _ticketStatuses;
         public IEnumerable<TicketDTO> SelectTickets()=> _tickets;
         public IEnumerable<TicketCommentDTO> SelectTicketComments() => _ticketComments;
+
+        public bool InsertTicket(TicketDTO ticket)
+        {
+            ((List<TicketDTO>)_tickets).Add(ticket);
+            return true;
+        }
+
+        public bool UpdateTicket(TicketDTO ticket)
+        {
+            var ticketInDb = _tickets.FirstOrDefault(x => x.Id == ticket.Id);
+            ((List<TicketDTO>)_tickets).Add(ticket);
+            return true;
+        }
     }    
 }

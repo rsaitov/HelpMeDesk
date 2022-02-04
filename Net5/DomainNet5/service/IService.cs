@@ -10,5 +10,7 @@ namespace Domain.service
     public interface IService
     {
         IEnumerable<TicketDTO> GetAllTickets();
+        bool AddTicket(TicketDTO ticket);
+        bool EditTicket(TicketDTO ticket);
     }
 }

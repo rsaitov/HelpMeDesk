@@ -14,6 +14,17 @@ namespace Domain.service
         {
             _repository = repository;
         }
+
+        public bool AddTicket(TicketDTO ticket)
+        {
+            _repository.
+        }
+
+        public bool EditTicket(TicketDTO ticket)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<TicketDTO> GetAllTickets()
         {
             return _repository.SelectTickets();

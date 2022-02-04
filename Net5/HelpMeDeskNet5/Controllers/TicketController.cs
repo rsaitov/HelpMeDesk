@@ -3,10 +3,7 @@ using Domain;
 using Domain.service;
 using HelpMeDeskNet5.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HelpMeDeskNet5.Controllers
 {
@@ -20,16 +17,19 @@ namespace HelpMeDeskNet5.Controllers
         public IActionResult Index()
         {
             var tickets = _service.GetAllTickets();
-            var model = new TicketListViewModel {
+            var model = new TicketListViewModel
+            {
                 Tickets = tickets
             };
 
             return View(model);
         }
 
-        [Route("ticket/{id}")]
-        public IActionResult Ticket(int id)
+        public IActionResult Detail(int? id)
         {
+            if (id == null)
+                return NotFound();
+
             var firstTicket = _service.GetAllTickets().FirstOrDefault(x => x.Id == id);
             var model = new TicketViewModel
             {
@@ -39,21 +39,53 @@ namespace HelpMeDeskNet5.Controllers
             return View(model);
         }
 
-        [Route("edit")]
-        [Route("edit/{id}")]
-        public IActionResult Edit(int id)
+        //GET - CREATE
+        public IActionResult Create()
         {
-            if (id != null)
-            {
-                var firstTicket = _service.GetAllTickets().FirstOrDefault(x => x.Id == id);
-                var model = new TicketViewModel
-                {
-                    Ticket = firstTicket
-                };
-                return View();
-            }
-
             return View();
+        }
+
+        //POST - CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Ticket obj)
+        {
+            if (ModelState.IsValid)
+            {
+                //_db.Category.Add(obj);
+                //_db.SaveChanges();
+                //return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
+
+        //GET - EDIT
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+                return View(new TicketDTO());
+
+            var firstTicket = _service.GetAllTickets().FirstOrDefault(x => x.Id == id);
+            return View(firstTicket);
+        }
+
+        //POST - EDIT
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Ticket ticket)
+        {
+            if (ModelState.IsValid)
+            {
+                //_db.Category.Update(obj);
+                //_db.SaveChanges();
+                //return RedirectToAction("Index");
+
+                if (ticket.Id == 0)
+                    _service.AddTicket();
+                else
+                    _service.EditTicket(ticket);
+            }
+            return View(ticket);
         }
     }
 }

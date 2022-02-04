@@ -1,7 +1,9 @@
-﻿@model TicketViewModel
+﻿@model TicketDTO
 
 <div class="container">
-    <form>
+    <form method="post">
+        <input asp-for="Id" hidden />
+
         <div class="col-md-12 order-md-1">
             <div class="row mt-2">
                 <div class="col-md-2">
@@ -13,10 +15,10 @@
 
             <div class="row mt-2 form-group">
                 <div class="col-md-2">
-                    <label for="project" class="float-right mt-1">Проект:</label>
+                    <label class="float-right mt-1" asp-for="Project">Проект:</label>
                 </div>
                 <div class="col-md-10">
-                    <select class="form-control" id="project">
+                    <select class="form-control">
                         <option>Janinn Fitness</option>
                         <option>Zebra Fitness</option>
                     </select>
@@ -25,28 +27,28 @@
 
             <div class="row mt-2">
                 <div class="col-md-2">
-                    <label for="name" class="float-right mt-1">Название:</label>
+                    <label class="float-right mt-1" asp-for="Name">Название:</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="text" id="name" class="form-control" placeholder="Название">
+                    <input type="text" class="form-control" placeholder="Название" asp-for="Name">
                 </div>
             </div>
 
             <div class="row mt-2">
                 <div class="col-md-2">
-                    <label for="description" class="float-right">Описание:</label>
+                    <label class="float-right" asp-for="Description">Описание:</label>
                 </div>
                 <div class="col-md-10">
-                    <textarea type="text" rows="3" id="description" class="form-control" placeholder="Описание"></textarea>
+                    <textarea type="text" rows="3" class="form-control" placeholder="Описание" asp-for="Description"></textarea>
                 </div>
             </div>
 
             <div class="row mt-2 form-group">
                 <div class="col-md-2">
-                    <label for="priority" class="float-right mt-1">Приоритет:</label>
+                    <label class="float-right mt-1" asp-for="Priority">Приоритет:</label>
                 </div>
                 <div class="col-md-10">
-                    <select class="form-control" id="priority">
+                    <select class="form-control" asp-for="Priority">
                         <option>Низкий</option>
                         <option>Средний</option>
                         <option>Высокий</option>
@@ -60,6 +62,9 @@
                     <label class="float-right mt-2">Вложения:</label>
                 </div>
                 <div class="col-md-10">
+                    <div>
+
+                    </div>
                     <button class="btn btn-light">
                         <i class="bi bi-paperclip"></i>
                     </button>
@@ -70,7 +75,7 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-10">
-                    <button type="submit" class="btn btn-success">Сохранить</button>
+                    <button type="submit" class="btn btn-success" value="Update">Сохранить</button>
                 </div>
             </div>
         </div>

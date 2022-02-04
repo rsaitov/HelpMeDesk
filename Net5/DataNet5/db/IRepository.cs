@@ -13,5 +13,8 @@ namespace Data
         IEnumerable<TicketStatusDTO> SelectTicketStatuses();
         IEnumerable<TicketDTO> SelectTickets();
         IEnumerable<TicketCommentDTO> SelectTicketComments();
+
+        bool InsertTicket(TicketDTO ticket);
+        bool UpdateTicket(TicketDTO ticket);
     }
 }
