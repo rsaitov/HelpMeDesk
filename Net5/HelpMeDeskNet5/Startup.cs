@@ -31,6 +31,12 @@ namespace HelpMeDeskNet5
             services.AddDbContext<HelpMeDeskContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HelpMeDeskContext")));
 
+            services.AddScoped<EfCoreProjectRepository>();
+            services.AddScoped<EfCoreUserRepository>();
+            services.AddScoped<EfCoreTicketRepository>();
+            services.AddScoped<EfCoreTicketCommentRepository>();
+            services.AddScoped<EfCoreTicketStatusRepository>();
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 

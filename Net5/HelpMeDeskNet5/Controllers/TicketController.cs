@@ -4,19 +4,20 @@ using Domain.service;
 using HelpMeDeskNet5.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HelpMeDeskNet5.Controllers
 {
     public class TicketController : Controller
     {
-        private IService _service;
-        public TicketController(IService service)
+        private EfCoreTicketRepository _ticketRepository;
+        public TicketController(EfCoreTicketRepository ticketRepository)
         {
-            _service = service;
+            _ticketRepository = ticketRepository;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var tickets = _service.GetAllTickets();
+            var tickets = await _ticketRepository.GetAll();
             var model = new TicketListViewModel
             {
                 Tickets = tickets
@@ -25,12 +26,12 @@ namespace HelpMeDeskNet5.Controllers
             return View(model);
         }
 
-        public IActionResult Detail(int? id)
+        public async Task<IActionResult> Detail(int? id)
         {
             if (id == null)
                 return NotFound();
 
-            var firstTicket = _service.GetAllTickets().FirstOrDefault(x => x.Id == id);
+            var firstTicket = await _ticketRepository.Get(id.Value);
             var model = new TicketViewModel
             {
                 Ticket = firstTicket
@@ -48,42 +49,35 @@ namespace HelpMeDeskNet5.Controllers
         //POST - CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Ticket obj)
+        public async Task<IActionResult> Create(Ticket obj)
         {
             if (ModelState.IsValid)
             {
-                //_db.Category.Add(obj);
-                //_db.SaveChanges();
-                //return RedirectToAction("Index");
+                await _ticketRepository.Add(obj);
+                return RedirectToAction("Detail");
             }
             return View(obj);
         }
 
         //GET - EDIT
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || id == 0)
                 return View(new TicketDTO());
 
-            var firstTicket = _service.GetAllTickets().FirstOrDefault(x => x.Id == id);
-            return View(firstTicket);
+            var firstTicket = await _ticketRepository.Get(id.Value);
+            return View();
         }
 
         //POST - EDIT
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Ticket ticket)
+        public async Task<IActionResult> Edit(Ticket ticket)
         {
             if (ModelState.IsValid)
             {
-                //_db.Category.Update(obj);
-                //_db.SaveChanges();
-                //return RedirectToAction("Index");
-
-                //if (ticket.Id == 0)
-                //    _service.AddTicket();
-                //else
-                //    _service.EditTicket(ticket);
+                await _ticketRepository.Update(ticket);
+                return RedirectToAction("Detail");
             }
             return View(ticket);
         }

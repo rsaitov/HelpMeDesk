@@ -11,6 +11,7 @@ namespace Data
     {
         public HelpMeDeskContext(DbContextOptions<HelpMeDeskContext> options) : base(options)
         {
+            
         }
 
         public DbSet<ProjectDTO> Project { get; set; }

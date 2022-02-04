@@ -26,10 +26,10 @@
                     @*<td>@ticket.Description</td>*@
                     <td>@ticket.CreationDate</td>
                     <td>@ticket.LastChangedDate</td>
-                    <td>@ticket.StatusId</td>
+                    <td>@ticket.Status</td>
                     <td>@ticket.Origin</td>
-                    <td>@ticket.AuthorId</td>
-                    <td>@ticket.ExecutorId</td>
+                    <td>@ticket.Author.Name</td>
+                    <td>@ticket.Executor?.Name</td>
                 </tr>
             }
         </tbody>

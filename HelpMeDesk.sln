@@ -5,11 +5,16 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{E2166CD5-4712-4361-B80B-0EABDA13319A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataNet5", "Net5\DataNet5\DataNet5.csproj", "{85A0247E-2145-4B2E-87D2-B6E271F05F53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataNet5", "Net5\DataNet5\DataNet5.csproj", "{85A0247E-2145-4B2E-87D2-B6E271F05F53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainNet5", "Net5\DomainNet5\DomainNet5.csproj", "{D2D4787C-63B2-4EA6-907F-99FDE6B6576B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainNet5", "Net5\DomainNet5\DomainNet5.csproj", "{D2D4787C-63B2-4EA6-907F-99FDE6B6576B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpMeDeskNet5", "Net5\HelpMeDeskNet5\HelpMeDeskNet5.csproj", "{C2627DDA-D83C-49EC-BCB1-3E76D965D5D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpMeDeskNet5", "Net5\HelpMeDeskNet5\HelpMeDeskNet5.csproj", "{C2627DDA-D83C-49EC-BCB1-3E76D965D5D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D80E2349-E486-404C-923D-BF7082A9B3AC}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
