@@ -43,7 +43,11 @@
                 <label class="float-right">Статус:</label>
             </div>
             <div class="col-md-10">
-                <p>@Model.Ticket.Status.Name</p>
+                <a href="#" class="badge badge-pill @(Model.Ticket.Status.Name == "New" ? "badge-secondary" :
+                    (Model.Ticket.Status.Name == "In progress" ? "badge-primary" :
+                    (Model.Ticket.Status.Name == "Delayed" ? "badge-warning" :
+                    (Model.Ticket.Status.Name == "Solved" ? "badge-success" : "badge-dark")))
+                 )">@Model.Ticket.Status.Name</a>
             </div>
         </div>
 
