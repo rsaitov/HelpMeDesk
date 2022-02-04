@@ -10,9 +10,23 @@ namespace Domain.service
     public class Service : IService
     {
         private EfCoreTicketRepository _ticketRepository;
-        public Service(EfCoreTicketRepository ticketRepository)
+        private EfCoreProjectRepository _projectRepository;
+        private EfCoreUserRepository _userRepository;
+        private EfCoreTicketCommentRepository _ticketCommentRepository;
+        private EfCoreTicketStatusRepository _ticketStatusRepository;
+
+        public Service(
+            EfCoreProjectRepository projectRepository,
+            EfCoreUserRepository userRepository,
+            EfCoreTicketCommentRepository ticketCommentRepository,
+            EfCoreTicketStatusRepository ticketStatusRepository,
+            EfCoreTicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
+            _projectRepository = projectRepository;
+            _userRepository = userRepository;
+            _ticketCommentRepository = ticketCommentRepository;
+            _ticketStatusRepository = ticketStatusRepository;
         }
 
         public TicketDTO AddTicket(TicketDTO ticket)
