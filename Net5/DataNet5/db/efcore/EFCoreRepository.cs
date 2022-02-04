@@ -13,14 +13,20 @@ namespace Data
         {
             this.context = context;
         }
-        public async Task<TEntity> Add(TEntity entity)
+        public TEntity Add(TEntity entity)
+        {
+            context.Set<TEntity>().Add(entity);
+            context.SaveChanges();
+            return entity;
+        }
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             context.Set<TEntity>().Add(entity);
             await context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<TEntity> Delete(int id)
+        public async Task<TEntity> DeleteAsync(int id)
         {
             var entity = await context.Set<TEntity>().FindAsync(id);
             if (entity == null)
@@ -34,17 +40,23 @@ namespace Data
             return entity;
         }
 
-        public async Task<TEntity> Get(int id)
+        public async Task<TEntity> GetAsync(int id)
         {
             return await context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<List<TEntity>> GetAll()
+        public async Task<List<TEntity>> GetAllAsync()
         {
             return await context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public TEntity Update(TEntity entity)
+        {
+            context.Entry(entity).State = EntityState.Modified;
+            context.SaveChanges();
+            return entity;
+        }
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             context.Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();

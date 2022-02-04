@@ -27,7 +27,8 @@ namespace HelpMeDeskNet5
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddTransient<IRepository, MockRepository>();
-            //services.AddTransient<IService, Service>();
+            services.AddTransient<IService, Service>();
+
             services.AddDbContext<HelpMeDeskContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HelpMeDeskContext")));
 

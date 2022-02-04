@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Data
@@ -87,27 +86,37 @@ Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. ";
             return true;
         }
 
-        public Task<List<IEntity>> GetAll()
+        public Task<List<IEntity>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEntity> Get(int id)
+        public Task<IEntity> GetAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEntity> Add(IEntity entity)
+        public Task<IEntity> AddAsync(IEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEntity> Update(IEntity entity)
+        public Task<IEntity> UpdateAsync(IEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEntity> Delete(int id)
+        public Task<IEntity> DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEntity Add(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEntity Update(IEntity entity)
         {
             throw new NotImplementedException();
         }

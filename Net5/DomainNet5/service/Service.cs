@@ -9,30 +9,28 @@ namespace Domain.service
 {
     public class Service : IService
     {
-        private IRepository<TicketDTO> _repository;
-        public Service(IRepository<TicketDTO> repository)
+        private EfCoreTicketRepository _ticketRepository;
+        public Service(EfCoreTicketRepository ticketRepository)
         {
-            _repository = repository;
+            _ticketRepository = ticketRepository;
         }
 
-        public bool AddTicket<TicketDTO>(TicketDTO ticket)
+        public TicketDTO AddTicket(TicketDTO ticket)
         {
-            return true;
+            return _ticketRepository.Add(ticket);
         }
 
-        public bool AddTicket(TicketDTO ticket)
+        public TicketDTO EditTicket(TicketDTO ticket)
         {
-            throw new NotImplementedException();
+            return _ticketRepository.Update(ticket);
         }
-
-        public bool EditTicket(TicketDTO ticket)
+        public TicketDTO GetTicket(int id)
         {
-            throw new NotImplementedException();
+            return _ticketRepository.Get(id);
         }
-
         public IEnumerable<TicketDTO> GetAllTickets()
         {
-            return null;
+            return _ticketRepository.GetAll();
         }
     }
 }

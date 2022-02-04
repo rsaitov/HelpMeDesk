@@ -10,14 +10,14 @@ namespace HelpMeDeskNet5.Controllers
 {
     public class TicketController : Controller
     {
-        private EfCoreTicketRepository _ticketRepository;
-        public TicketController(EfCoreTicketRepository ticketRepository)
+        private IService _service;
+        public TicketController(IService service)
         {
-            _ticketRepository = ticketRepository;
+            _service = service;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var tickets = await _ticketRepository.GetAll();
+            var tickets = _service.GetAllTickets();
             var model = new TicketListViewModel
             {
                 Tickets = tickets
@@ -26,12 +26,12 @@ namespace HelpMeDeskNet5.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Detail(int? id)
+        public IActionResult Detail(int? id)
         {
             if (id == null)
                 return NotFound();
 
-            var firstTicket = await _ticketRepository.Get(id.Value);
+            var firstTicket = _service.GetTicket(id.Value);
             var model = new TicketViewModel
             {
                 Ticket = firstTicket
@@ -49,34 +49,34 @@ namespace HelpMeDeskNet5.Controllers
         //POST - CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Ticket obj)
+        public IActionResult Create(Ticket obj)
         {
             if (ModelState.IsValid)
             {
-                await _ticketRepository.Add(obj);
+                _service.AddTicket(obj);
                 return RedirectToAction("Detail");
             }
             return View(obj);
         }
 
         //GET - EDIT
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
                 return View(new TicketDTO());
 
-            var firstTicket = await _ticketRepository.Get(id.Value);
-            return View();
+            var firstTicket = _service.GetTicket(id.Value);
+            return View(firstTicket);
         }
 
         //POST - EDIT
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Ticket ticket)
+        public IActionResult Edit(Ticket ticket)
         {
             if (ModelState.IsValid)
             {
-                await _ticketRepository.Update(ticket);
+                _service.EditTicket(ticket);
                 return RedirectToAction("Detail");
             }
             return View(ticket);
