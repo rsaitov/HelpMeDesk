@@ -1,12 +1,11 @@
 ﻿namespace Data
 {
-    public class TicketStatusDTO
+    public class TicketStatusDTO : IEntity
     {
-        public int Id { get; }
-        public string Name { get; }
-        public TicketStatusDTO(int id, string name)
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public TicketStatusDTO(string name)
         {
-            Id = id;
             Name = name;
         }
     }

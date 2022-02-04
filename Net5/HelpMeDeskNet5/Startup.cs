@@ -3,6 +3,7 @@ using Domain.service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,8 +26,11 @@ namespace HelpMeDeskNet5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IRepository, MockRepository>();
-            services.AddTransient<IService, Service>();
+            //services.AddTransient<IRepository, MockRepository>();
+            //services.AddTransient<IService, Service>();
+            services.AddDbContext<HelpMeDeskContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("HelpMeDeskContext")));
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
@@ -56,6 +60,12 @@ namespace HelpMeDeskNet5
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                HelpMeDeskContext context = scope.ServiceProvider.GetRequiredService<HelpMeDeskContext>();
+                SeedData.Initial(context);
+            }
         }
     }
 }

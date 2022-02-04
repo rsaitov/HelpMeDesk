@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Data
 {
-    public class TicketCommentDTO
+    public class TicketCommentDTO : IEntity
     {
-        public int Id { get; }
-        public int TicketId { get; }
-        public DateTime PublishDate { get; }
-        public string Comment { get;  }
+        public int Id { get; set; }
+        public int TicketId { get; set; }
+        public virtual TicketDTO ticket { get; set; }
+        public DateTime PublishDate { get; set; }
+        public string Comment { get; set; }
 
-        public TicketCommentDTO(int id, int ticketId, DateTime publishDate, string comment)
+        public TicketCommentDTO(int ticketId, DateTime publishDate, string comment)
         {
-            Id = id;
             TicketId = ticketId;
             PublishDate = publishDate;
             Comment = comment;

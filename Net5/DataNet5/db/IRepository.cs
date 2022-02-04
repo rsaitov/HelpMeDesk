@@ -1,20 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Data
 {
-    public interface IRepository
+    public interface IRepository<T> where T : class, IEntity
     {
-        IEnumerable<UserDTO> SelectUsers();
-        //UserDTO InsertUser(UserDTO user);
-        //bool UpdateUser(UserDTO user);
-        //bool DeleteUser(int userId);
-
-        IEnumerable<ProjectDTO> SelectProjects();
-        IEnumerable<TicketStatusDTO> SelectTicketStatuses();
-        IEnumerable<TicketDTO> SelectTickets();
-        IEnumerable<TicketCommentDTO> SelectTicketComments();
-
-        bool InsertTicket(TicketDTO ticket);
-        bool UpdateTicket(TicketDTO ticket);
+        Task<List<T>> GetAll();
+        Task<T> Get(int id);
+        Task<T> Add(T entity);
+        Task<T> Update(T entity);
+        Task<T> Delete(int id);
     }
 }

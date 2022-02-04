@@ -9,15 +9,20 @@ namespace Domain.service
 {
     public class Service : IService
     {
-        private IRepository _repository;
-        public Service(IRepository repository)
+        private IRepository<TicketDTO> _repository;
+        public Service(IRepository<TicketDTO> repository)
         {
             _repository = repository;
         }
 
+        public bool AddTicket<TicketDTO>(TicketDTO ticket)
+        {
+            return true;
+        }
+
         public bool AddTicket(TicketDTO ticket)
         {
-            _repository.
+            throw new NotImplementedException();
         }
 
         public bool EditTicket(TicketDTO ticket)
@@ -27,7 +32,7 @@ namespace Domain.service
 
         public IEnumerable<TicketDTO> GetAllTickets()
         {
-            return _repository.SelectTickets();
+            return null;
         }
     }
 }

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Data
+﻿namespace Data
 {
-    public class ProjectDTO
+    public class ProjectDTO : IEntity
     {
-        public int Id { get; }
-        public string Name { get; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
-        public ProjectDTO(int id, string name)
+        public ProjectDTO(string name)
         {
-            Id = id;
             Name = name;
         }
     }

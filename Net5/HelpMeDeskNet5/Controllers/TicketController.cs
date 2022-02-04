@@ -80,10 +80,10 @@ namespace HelpMeDeskNet5.Controllers
                 //_db.SaveChanges();
                 //return RedirectToAction("Index");
 
-                if (ticket.Id == 0)
-                    _service.AddTicket();
-                else
-                    _service.EditTicket(ticket);
+                //if (ticket.Id == 0)
+                //    _service.AddTicket();
+                //else
+                //    _service.EditTicket(ticket);
             }
             return View(ticket);
         }

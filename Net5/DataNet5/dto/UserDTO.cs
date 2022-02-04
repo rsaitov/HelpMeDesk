@@ -2,19 +2,19 @@
 
 namespace Data
 {
-    public class UserDTO
+    public class UserDTO : IEntity
     {
-        public int Id { get; }
-        public string Email { get; }
-        public string Name { get; }
-        public string Password { get; }
-        public string Phone { get; }
-        public UserRole Role { get; }
-        public int ProjectId { get; }
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Phone { get; set; }
+        public UserRole Role { get; set; }
+        public int ProjectId { get; set; }
+        public virtual ProjectDTO Project { get; set; }
 
-        public UserDTO(int id, string email, string name, string password, string phone, UserRole role, int projectId)
+        public UserDTO(string email, string name, string password, string phone, UserRole role, int projectId)
         {
-            Id = id;
             Email = email;
             Name = name;
             Password = password;

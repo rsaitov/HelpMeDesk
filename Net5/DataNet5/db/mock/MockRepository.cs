@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Data
 {
-    public class MockRepository : IRepository
+    public class MockRepository : IRepository<IEntity>
     {
         private IEnumerable<UserDTO> _users;
         private IEnumerable<ProjectDTO> _projects;
@@ -15,24 +16,24 @@ namespace Data
         public MockRepository()
         {
             _users = new List<UserDTO>() {
-                new UserDTO(1, "admin@email.com", "Rinat Saitov", "123456", "9164567561", UserRole.Administrator, 1),
-                new UserDTO(2, "first@email.com", "Fernando Alonso", "123456", "9164567561", UserRole.Executor, 1),
-                new UserDTO(3, "first@email.com", "Lewis Hamilton", "123456", "9164567561", UserRole.Executor, 1),
-                new UserDTO(4, "first@email.com", "Kimi Raikkonen", "123456", "9164567561", UserRole.User, 1),
-                new UserDTO(5, "first@email.com", "Max Verstappen", "123456", "9164567561", UserRole.User, 1),
+                new UserDTO("admin@email.com", "Rinat Saitov", "123456", "9164567561", UserRole.Administrator, 1),
+                new UserDTO("first@email.com", "Fernando Alonso", "123456", "9164567561", UserRole.Executor, 1),
+                new UserDTO("first@email.com", "Lewis Hamilton", "123456", "9164567561", UserRole.Executor, 1),
+                new UserDTO("first@email.com", "Kimi Raikkonen", "123456", "9164567561", UserRole.User, 1),
+                new UserDTO("first@email.com", "Max Verstappen", "123456", "9164567561", UserRole.User, 1),
             };
 
             _projects = new List<ProjectDTO>() {
-                new ProjectDTO(1, "Mercedes"),
-                new ProjectDTO(2, "Red Bull"),
-                new ProjectDTO(3, "Ferrari"),
+                new ProjectDTO("Mercedes"),
+                new ProjectDTO("Red Bull"),
+                new ProjectDTO("Ferrari"),
             };
 
             _ticketStatuses = new List<TicketStatusDTO>() {
-                new TicketStatusDTO(1, "New"),
-                new TicketStatusDTO(2, "In progress"),
-                new TicketStatusDTO(3, "Delayed"),
-                new TicketStatusDTO(4, "Solved"),
+                new TicketStatusDTO("New"),
+                new TicketStatusDTO( "In progress"),
+                new TicketStatusDTO("Delayed"),
+                new TicketStatusDTO("Solved"),
             };
 
             var today = DateTime.Now;
@@ -47,17 +48,17 @@ Malesuada fames ac turpis egestas. Faucibus scelerisque eleifend donec pretium v
 Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. ";
 
             _tickets = new List<TicketDTO>() {
-                new TicketDTO(1, 1, 4, "Server not works", longDescription, yesterday, today, 1, TicketOrigin.Web, TicketPriority.Low, 2),
-                new TicketDTO(2, 1, 4, "Application not works", "This is the description", yesterday, today, 2, TicketOrigin.Web, TicketPriority.Medium, 2),
-                new TicketDTO(3, 1, 5, "Printer HP not works", "This is the description", yesterday, today, 3, TicketOrigin.Web, TicketPriority.High, 3),
-                new TicketDTO(4, 1, 5, "Server not works", "This is the description", yesterday, today, 4, TicketOrigin.Web, TicketPriority.Critical, 3),
+                new TicketDTO(1, 4, "Server not works", longDescription, yesterday, today, 1, TicketOrigin.Web, TicketPriority.Low, 2),
+                new TicketDTO(1, 4, "Application not works", "This is the description", yesterday, today, 2, TicketOrigin.Web, TicketPriority.Medium, 2),
+                new TicketDTO(1, 5, "Printer HP not works", "This is the description", yesterday, today, 3, TicketOrigin.Web, TicketPriority.High, 3),
+                new TicketDTO(1, 5, "Server not works", "This is the description", yesterday, today, 4, TicketOrigin.Web, TicketPriority.Critical, 3),
             };
 
             _ticketComments = new List<TicketCommentDTO>() {
-                new TicketCommentDTO(1, 1, yesterday, "This is first comment"),
-                new TicketCommentDTO(2, 1, yesterday, "This is second comment"),
-                new TicketCommentDTO(3, 1, today, "This is third comment"),
-                new TicketCommentDTO(4, 1, today, "This is fourth comment"),
+                new TicketCommentDTO(1, yesterday, "This is first comment"),
+                new TicketCommentDTO(1, yesterday, "This is second comment"),
+                new TicketCommentDTO(1, today, "This is third comment"),
+                new TicketCommentDTO(1, today, "This is fourth comment"),
             };
 
             _tickets.First().Author = _users.First(x => x.Role == UserRole.User);
@@ -84,6 +85,31 @@ Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. ";
             var ticketInDb = _tickets.FirstOrDefault(x => x.Id == ticket.Id);
             ((List<TicketDTO>)_tickets).Add(ticket);
             return true;
+        }
+
+        public Task<List<IEntity>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEntity> Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEntity> Add(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEntity> Update(IEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEntity> Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }    
 }
