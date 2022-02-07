@@ -31,11 +31,15 @@ namespace Domain.service
 
         public TicketDTO AddTicket(TicketDTO ticket)
         {
+            var date = DateTime.Now;
+            ticket.CreationDate = date;
+            ticket.LastChangedDate = date;
             return _ticketRepository.Add(ticket);
         }
 
         public TicketDTO EditTicket(TicketDTO ticket)
         {
+            ticket.LastChangedDate = DateTime.Now;
             return _ticketRepository.Update(ticket);
         }
         public TicketDTO GetTicket(int id)
