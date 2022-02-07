@@ -35,16 +35,15 @@ namespace HelpMeDeskNet5.Controllers
             if (id == null)
                 return NotFound();
 
-            var ticket = _service.GetTicket(id.Value);
-            var model = _mapper.Map<TicketViewModel>(ticket);
-
-            return View(model);
+            var viewModel = ConstructTicketViewModel(id);
+            return View(viewModel);
         }
 
         //GET - CREATE
         public IActionResult Create()
         {
-            return View();
+            var viewModel = ConstructTicketViewModel(null);
+            return View("Edit", viewModel);
         }
 
         //POST - CREATE
@@ -63,16 +62,8 @@ namespace HelpMeDeskNet5.Controllers
         //GET - EDIT
         public IActionResult Edit(int? id)
         {
-            if (id == null || id == 0)
-                return View(new TicketDTO());
-
-            var ticket = _service.GetTicket(id.Value);
-            var model = _mapper.Map<TicketViewModel>(ticket);
-            model.TicketStatuses = _service.GetAllTicketStatuses();
-            model.Projects = _service.GetAllProjects();
-            model.Users = _service.GetAllUsers();
-
-            return View(model);
+            var viewModel = ConstructTicketViewModel(id);
+            return View(viewModel);
         }
 
         //POST - EDIT
@@ -83,11 +74,30 @@ namespace HelpMeDeskNet5.Controllers
             var ticket = _mapper.Map<TicketDTO>(model);
             if (ModelState.IsValid)
             {
-                ticket.LastChangedDate = DateTime.Now;
-                _service.EditTicket(ticket);
+                if (ticket.Id == 0)
+                    _service.AddTicket(ticket);
+                else
+                    _service.EditTicket(ticket);
+
                 return RedirectToAction("Detail", new { id = ticket.Id });
             }
+
+            model.TicketStatuses = _service.GetAllTicketStatuses();
+            model.Projects = _service.GetAllProjects();
+            model.Users = _service.GetAllUsers();
             return View(model);
+        }
+
+        private TicketViewModel ConstructTicketViewModel(int? id)
+        {
+            var ticket = (id == null || id == 0) ? null : _service.GetTicket(id.Value);
+            var model = ReferenceEquals(null, ticket) ? new TicketViewModel() :
+                _mapper.Map<TicketViewModel>(ticket);
+            model.TicketStatuses = _service.GetAllTicketStatuses();
+            model.Projects = _service.GetAllProjects();
+            model.Users = _service.GetAllUsers();
+
+            return model;
         }
     }
 }

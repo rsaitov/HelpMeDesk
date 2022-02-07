@@ -10,7 +10,7 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-3">
-                    <h3>Новая заявка</h3>
+                    <h3>@(@Model.Id == 0 ? "Новая заявка" : $"Заявка №{Model.Id}")</h3>
                 </div>
             </div>
 
@@ -38,7 +38,6 @@
                         @foreach (var user in @Model.Users)
                         {
                             <option value="@user.Id">@user.Name</option>
-
                         }
                     </select>
                 </div>
@@ -65,6 +64,7 @@
                 </div>
                 <div class="col-md-10">
                     <input type="text" class="form-control" placeholder="Название" asp-for="@Model.Name">
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
                 </div>
             </div>
 

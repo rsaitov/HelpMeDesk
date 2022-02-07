@@ -8,11 +8,11 @@ namespace Data
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(60, MinimumLength = 3)]
+        [Required(ErrorMessage="Обязательное поле")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Минимальная длина - 3 символа")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Обязательное поле")]
         public int ProjectId { get; set; }
         public virtual ProjectDTO Project { get; set; }
 
