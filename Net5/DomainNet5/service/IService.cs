@@ -13,5 +13,9 @@ namespace Domain.service
         TicketDTO GetTicket(int id);
         TicketDTO AddTicket(TicketDTO ticket);
         TicketDTO EditTicket(TicketDTO ticket);
+
+        IEnumerable<TicketStatusDTO> GetAllTicketStatuses();
+        IEnumerable<ProjectDTO> GetAllProjects();
+        IEnumerable<UserDTO> GetAllUsers();
     }
 }

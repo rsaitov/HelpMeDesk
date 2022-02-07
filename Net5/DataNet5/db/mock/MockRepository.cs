@@ -120,5 +120,10 @@ Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. ";
         {
             throw new NotImplementedException();
         }
+
+        public List<IEntity> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }    
 }

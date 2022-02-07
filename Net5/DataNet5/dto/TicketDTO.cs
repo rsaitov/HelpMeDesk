@@ -12,6 +12,7 @@ namespace Data
         [StringLength(60, MinimumLength = 3)]
         public string Name { get; set; }
 
+        [Required]
         public int ProjectId { get; set; }
         public virtual ProjectDTO Project { get; set; }
 
@@ -21,6 +22,7 @@ namespace Data
         public int? ExecutorId { get; set; }
         public virtual UserDTO Executor { get; set; }
 
+        [Required]
         public int StatusId { get; set; }
         public virtual TicketStatusDTO Status { get; set; }
 

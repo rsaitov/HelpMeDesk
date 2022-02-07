@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace HelpMeDeskNet5.ViewModels
 {
-    public class TicketViewModel
+    public class TicketViewModel : TicketDTO
     {
-        public TicketDTO Ticket;
+        public IEnumerable<TicketStatusDTO> TicketStatuses;
+        public IEnumerable<ProjectDTO> Projects;
+        public IEnumerable<UserDTO> Users;
     }
 }

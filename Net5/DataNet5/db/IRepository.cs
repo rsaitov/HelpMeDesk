@@ -7,6 +7,7 @@ namespace Data
     {
         T Add(T entity);
         T Update(T entity);
+        List<T> GetAll();
 
         Task<List<T>> GetAllAsync();
         Task<T> GetAsync(int id);

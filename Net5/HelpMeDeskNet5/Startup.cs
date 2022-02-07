@@ -1,3 +1,4 @@
+using AutoMapper;
 using Data;
 using Domain.service;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,13 @@ namespace HelpMeDeskNet5
             services.AddScoped<EfCoreTicketCommentRepository>();
             services.AddScoped<EfCoreTicketStatusRepository>();
             services.AddTransient<IService, Service>();
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddDbContext<HelpMeDeskContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HelpMeDeskContext")));

@@ -1,8 +1,9 @@
-﻿@model TicketDTO
+﻿@model TicketViewModel
 
 <div class="container">
     <form method="post">
-        <input asp-for="Id" hidden />
+        <input asp-for="@Model.Id" hidden />
+        <input asp-for="@Model.CreationDate" hidden />
 
         <div class="col-md-12 order-md-1">
             <div class="row mt-2">
@@ -15,40 +16,87 @@
 
             <div class="row mt-2 form-group">
                 <div class="col-md-2">
-                    <label class="float-right mt-1" asp-for="Project">Проект:</label>
+                    <label class="float-right mt-1" asp-for="@Model.ProjectId">Проект:</label>
                 </div>
                 <div class="col-md-10">
-                    <select class="form-control">
-                        <option>Janinn Fitness</option>
-                        <option>Zebra Fitness</option>
+                    <select class="form-control" asp-for="@Model.ProjectId">
+                        @foreach (var project in @Model.Projects)
+                        {
+                            <option value="@project.Id">@project.Name</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-2 form-group">
+                <div class="col-md-2">
+                    <label class="float-right mt-1" asp-for="@Model.AuthorId">Автор:</label>
+                </div>
+                <div class="col-md-10">
+                    <select class="form-control" asp-for="@Model.AuthorId">
+                        @foreach (var user in @Model.Users)
+                        {
+                            <option value="@user.Id">@user.Name</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-2 form-group">
+                <div class="col-md-2">
+                    <label class="float-right mt-1" asp-for="@Model.ExecutorId">Исполнитель:</label>
+                </div>
+                <div class="col-md-10">
+                    <select class="form-control" asp-for="@Model.ExecutorId">
+                        @foreach (var user in @Model.Users)
+                        {
+                            <option value="@user.Id">@user.Name</option>
+
+                        }
                     </select>
                 </div>
             </div>
 
             <div class="row mt-2">
                 <div class="col-md-2">
-                    <label class="float-right mt-1" asp-for="Name">Название:</label>
+                    <label class="float-right mt-1" asp-for="@Model.Name">Название:</label>
                 </div>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" placeholder="Название" asp-for="Name">
+                    <input type="text" class="form-control" placeholder="Название" asp-for="@Model.Name">
                 </div>
             </div>
 
             <div class="row mt-2">
                 <div class="col-md-2">
-                    <label class="float-right" asp-for="Description">Описание:</label>
+                    <label class="float-right" asp-for="@Model.Description">Описание:</label>
                 </div>
                 <div class="col-md-10">
-                    <textarea type="text" rows="3" class="form-control" placeholder="Описание" asp-for="Description"></textarea>
+                    <textarea type="text" rows="3" class="form-control" placeholder="Описание" asp-for="@Model.Description"></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <label class="float-right" asp-for="@Model.StatusId">Статус:</label>
+                </div>
+                <div class="col-md-10">
+                    <select class="form-control" asp-for="@Model.StatusId">
+                        @foreach (var status in @Model.TicketStatuses)
+                        {
+                            <option value="@status.Id">@status.Name</option>
+                        }
+                    </select>
                 </div>
             </div>
 
             <div class="row mt-2 form-group">
                 <div class="col-md-2">
-                    <label class="float-right mt-1" asp-for="Priority">Приоритет:</label>
+                    <label class="float-right mt-1" asp-for="@Model.Priority">Приоритет:</label>
                 </div>
                 <div class="col-md-10">
-                    <select class="form-control" asp-for="Priority">
+                    <select class="form-control" asp-for="@Model.Priority">
                         <option value="1">Низкий</option>
                         <option value="2">Средний</option>
                         <option value="3">Высокий</option>

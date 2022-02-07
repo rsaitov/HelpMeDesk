@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Data
@@ -43,6 +44,10 @@ namespace Data
         public async Task<TEntity> GetAsync(int id)
         {
             return await context.Set<TEntity>().FindAsync(id);
+        }
+        public List<TEntity> GetAll()
+        {
+            return context.Set<TEntity>().ToList();
         }
 
         public async Task<List<TEntity>> GetAllAsync()

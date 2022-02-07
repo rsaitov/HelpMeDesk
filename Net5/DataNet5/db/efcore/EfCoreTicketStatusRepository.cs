@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class EfCoreTicketStatusRepository : EfCoreRepository<TicketDTO, HelpMeDeskContext>
+    public class EfCoreTicketStatusRepository : EfCoreRepository<TicketStatusDTO, HelpMeDeskContext>
     {
         public EfCoreTicketStatusRepository(HelpMeDeskContext context) : base(context)
         {

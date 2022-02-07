@@ -1,8 +1,10 @@
-﻿using Data;
+﻿using AutoMapper;
+using Data;
 using Domain;
 using Domain.service;
 using HelpMeDeskNet5.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,9 +13,11 @@ namespace HelpMeDeskNet5.Controllers
     public class TicketController : Controller
     {
         private IService _service;
-        public TicketController(IService service)
+        private IMapper _mapper;
+        public TicketController(IService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -31,11 +35,8 @@ namespace HelpMeDeskNet5.Controllers
             if (id == null)
                 return NotFound();
 
-            var firstTicket = _service.GetTicket(id.Value);
-            var model = new TicketViewModel
-            {
-                Ticket = firstTicket
-            };
+            var ticket = _service.GetTicket(id.Value);
+            var model = _mapper.Map<TicketViewModel>(ticket);
 
             return View(model);
         }
@@ -65,21 +66,28 @@ namespace HelpMeDeskNet5.Controllers
             if (id == null || id == 0)
                 return View(new TicketDTO());
 
-            var firstTicket = _service.GetTicket(id.Value);
-            return View(firstTicket);
+            var ticket = _service.GetTicket(id.Value);
+            var model = _mapper.Map<TicketViewModel>(ticket);
+            model.TicketStatuses = _service.GetAllTicketStatuses();
+            model.Projects = _service.GetAllProjects();
+            model.Users = _service.GetAllUsers();
+
+            return View(model);
         }
 
         //POST - EDIT
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Ticket ticket)
+        public IActionResult Edit(TicketViewModel model)
         {
+            var ticket = _mapper.Map<TicketDTO>(model);
             if (ModelState.IsValid)
             {
+                ticket.LastChangedDate = DateTime.Now;
                 _service.EditTicket(ticket);
-                return RedirectToAction("Detail");
+                return RedirectToAction("Detail", new { id = ticket.Id });
             }
-            return View(ticket);
+            return View(model);
         }
     }
 }

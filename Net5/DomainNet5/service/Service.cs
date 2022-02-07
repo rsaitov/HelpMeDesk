@@ -46,5 +46,20 @@ namespace Domain.service
         {
             return _ticketRepository.GetAll();
         }
+
+        public IEnumerable<TicketStatusDTO> GetAllTicketStatuses()
+        {
+            return _ticketStatusRepository.GetAll();
+        }
+
+        public IEnumerable<ProjectDTO> GetAllProjects()
+        {
+            return _projectRepository.GetAll();
+        }
+
+        public IEnumerable<UserDTO> GetAllUsers()
+        {
+            return _userRepository.GetAll();
+        }
     }
 }
