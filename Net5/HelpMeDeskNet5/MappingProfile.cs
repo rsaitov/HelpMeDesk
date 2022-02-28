@@ -14,6 +14,12 @@ namespace HelpMeDeskNet5
 
             CreateMap<TicketDTO, TicketViewModel>();
             CreateMap<TicketViewModel, TicketDTO>();
+
+            CreateMap<UserDTO, RegisterViewModel>();
+            CreateMap<RegisterViewModel, UserDTO>();
+
+            CreateMap<UserDTO, LoginViewModel>();
+            CreateMap<LoginViewModel, UserDTO>();
         }
     }
 }

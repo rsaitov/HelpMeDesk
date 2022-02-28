@@ -65,5 +65,31 @@ namespace Domain.service
         {
             return _userRepository.GetAll();
         }
+
+        public bool CheckUserExists(string email)
+        {
+            var users = _userRepository.GetAll();
+            return users.Any(x => string.Equals(x.Email, email, StringComparison.OrdinalIgnoreCase));
+        }
+        public UserDTO CheckUser(string email, string password)
+        {
+            var users = _userRepository.GetAll();
+            return users.FirstOrDefault(x => string.Equals(x.Email, email, StringComparison.OrdinalIgnoreCase) &&
+                                             string.Equals(x.Password, password, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public void RegisterUser(string email, string name, string password, int projectId)
+        {
+            var users = _userRepository.GetAll();
+            if (users.Any(x => string.Equals(x.Email, email, StringComparison.OrdinalIgnoreCase)))
+                return;
+
+            var user = new UserDTO(email, name, password,
+                phone: "",
+                role: UserRole.User,
+                projectId: projectId);
+
+            _userRepository.Add(user);
+        }
     }
 }

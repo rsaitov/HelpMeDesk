@@ -3,6 +3,7 @@ using Data;
 using Domain;
 using Domain.service;
 using HelpMeDeskNet5.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace HelpMeDeskNet5.Controllers
 {
+    [Authorize]
     public class TicketController : Controller
     {
         private IService _service;

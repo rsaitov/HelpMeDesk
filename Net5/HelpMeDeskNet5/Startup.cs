@@ -1,6 +1,7 @@
 using AutoMapper;
 using Data;
 using Domain.service;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -44,6 +45,12 @@ namespace HelpMeDeskNet5
             services.AddDbContext<HelpMeDeskContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HelpMeDeskContext")));
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
@@ -65,6 +72,7 @@ namespace HelpMeDeskNet5
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

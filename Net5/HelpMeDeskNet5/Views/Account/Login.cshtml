@@ -1,0 +1,25 @@
+﻿@model LoginViewModel
+
+    <div class="container mt-3">
+        <h2>Вход на сайт</h2>
+
+        <form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
+            <div class="validation text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="col-md-5 order-md-1">
+                <div class="form-group">
+                    <label asp-for="Email">Введите Email</label>
+                    <input class="form-control" type="text" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Введите пароль</label>
+                    <input class="form-control" asp-for="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Войти" />
+                    <a asp-controller="Account" asp-action="Register" class="ml-2">Регистрация</a>
+                </div>
+            </div>
+        </form>
+    </div>

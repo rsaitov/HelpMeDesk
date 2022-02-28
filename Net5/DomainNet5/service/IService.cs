@@ -17,5 +17,9 @@ namespace Domain.service
         IEnumerable<TicketStatusDTO> GetAllTicketStatuses();
         IEnumerable<ProjectDTO> GetAllProjects();
         IEnumerable<UserDTO> GetAllUsers();
+
+        bool CheckUserExists(string email);
+        UserDTO CheckUser(string email, string password);
+        void RegisterUser(string email, string name, string password, int projectId);
     }
 }
