@@ -19,24 +19,36 @@ namespace HelpMeDeskNet5.Controllers
             _service = service;
             _mapper = mapper;
         }
-        public IActionResult Index()
-        {
-            var tickets = _service.GetAllTickets();
-            var model = new TicketListViewModel
-            {
-                Tickets = tickets
-            };
+        //public IActionResult Index()
+        //{
+        //    var tickets = _service.GetAllTickets();
+        //    var model = new TicketListViewModel
+        //    {
+        //        Tickets = tickets
+        //    };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
-        public IActionResult Detail(int? id)
+        [Route("")]
+        [Route("Ticket")]
+        [Route("Ticket/{id?}")]
+        public IActionResult Index(int? id)
         {
             if (id == null)
-                return NotFound();
+            {
+                var tickets = _service.GetAllTickets();
+                var model = new TicketListViewModel
+                {
+                    Tickets = tickets
+                };
+
+                return View(model);
+                //return NotFound();
+            }
 
             var viewModel = ConstructTicketViewModel(id);
-            return View(viewModel);
+            return View("Detail", viewModel);
         }
 
         //GET - CREATE

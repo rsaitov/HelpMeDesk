@@ -22,7 +22,7 @@
             {
             <tr>
                 <th scope="row">@ticket.Id</th>
-                <td><a asp-controller="Ticket" asp-action="Detail" asp-route-id="@ticket.Id">@ticket.Name</a></td>
+                <td><a asp-controller="Ticket" asp-route-id="@ticket.Id">@ticket.Name</a></td>
                 <td>@ticket.Project.Name</td>
                 <td>@ticket.CreationDate.ToShortDateString() @ticket.CreationDate.ToShortTimeString()</td>
                 <td>@ticket.LastChangedDate.Value.ToShortDateString() @ticket.LastChangedDate.Value.ToShortTimeString()</td>
