@@ -9,5 +9,5 @@ It allows IT-crew to make a single point for handling all IT-tasks, keep on focu
 https://medium.com/net-core/repository-pattern-implementation-in-asp-net-core-21e01c6664d7
 https://github.com/kilicars/AspNetCoreRepositoryPattern
 
-Как мы написали helpdesk
+РљР°Рє РјС‹ РЅР°РїРёСЃР°Р»Рё helpdesk
 https://habr.com/ru/post/227277/
