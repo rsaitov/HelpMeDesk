@@ -8,9 +8,21 @@ namespace Data
 {
     public class EfCoreUserRepository : EfCoreRepository<UserDTO, HelpMeDeskContext>
     {
+        private readonly HelpMeDeskContext _context;
         public EfCoreUserRepository(HelpMeDeskContext context) : base(context)
         {
-
+            _context = context;
+        }
+        public UserDTO Get(string email, string password)
+        {
+            email = email.ToLowerInvariant();
+            return _context.User.FirstOrDefault(x => string.Equals(x.Email, email) &&
+                                             string.Equals(x.Password, password));
+        }
+        public bool Exists(string email)
+        {
+            email = email.ToLowerInvariant();
+            return _context.User.Any(x => string.Equals(x.Email, email));
         }
     }
 }

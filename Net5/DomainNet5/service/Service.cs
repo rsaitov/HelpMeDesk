@@ -68,23 +68,22 @@ namespace Domain.service
 
         public bool CheckUserExists(string email)
         {
-            var users = _userRepository.GetAll();
-            return users.Any(x => string.Equals(x.Email, email, StringComparison.OrdinalIgnoreCase));
+            return _userRepository.Exists(email);
         }
         public UserDTO CheckUser(string email, string password)
         {
-            var users = _userRepository.GetAll();
-            return users.FirstOrDefault(x => string.Equals(x.Email, email, StringComparison.OrdinalIgnoreCase) &&
-                                             string.Equals(x.Password, password, StringComparison.OrdinalIgnoreCase));
+            return _userRepository.Get(email, password);
         }
 
         public void RegisterUser(string email, string name, string password, int projectId)
         {
-            var users = _userRepository.GetAll();
-            if (users.Any(x => string.Equals(x.Email, email, StringComparison.OrdinalIgnoreCase)))
+            if (_userRepository.Exists(email))
                 return;
 
-            var user = new UserDTO(email, name, password,
+            var user = new UserDTO(
+                email.ToLower(), 
+                name, 
+                password,
                 phone: "",
                 role: UserRole.User,
                 projectId: projectId);
