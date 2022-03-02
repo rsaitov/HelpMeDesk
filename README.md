@@ -1,6 +1,6 @@
 # HelpMeDesk
 
-Stack: ASP.NET Core MVC, MSSQL.
+Stack: ASP.NET Core 5 MVC, MSSQL.
 
 HelpMeDesk is a smart service desk system designed as web-application. 
 
