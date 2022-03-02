@@ -70,6 +70,10 @@ namespace Domain.service
         {
             return _userRepository.Exists(email);
         }
+        public UserDTO GetUser(string email)
+        {
+            return _userRepository.Get(email);
+        }
         public UserDTO CheckUser(string email, string password)
         {
             return _userRepository.Get(email, password);

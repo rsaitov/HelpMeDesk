@@ -110,6 +110,7 @@ namespace HelpMeDeskNet5.Controllers
             model.TicketStatuses = _service.GetAllTicketStatuses();
             model.Projects = _service.GetAllProjects();
             model.Users = _service.GetAllUsers();
+            model.User = _service.GetUser(User.Identity.Name);
 
             return model;
         }

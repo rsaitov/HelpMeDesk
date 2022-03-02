@@ -13,11 +13,11 @@ namespace Data
         {
             _context = context;
         }
-        public UserDTO Get(string email, string password)
+        public UserDTO Get(string email, string password = null)
         {
             email = email.ToLowerInvariant();
             return _context.User.FirstOrDefault(x => string.Equals(x.Email, email) &&
-                                             string.Equals(x.Password, password));
+                                             (ReferenceEquals(null, password) || string.Equals(x.Password, password)));
         }
         public bool Exists(string email)
         {
