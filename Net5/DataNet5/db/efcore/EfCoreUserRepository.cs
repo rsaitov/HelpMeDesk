@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,20 @@ namespace Data
         {
             email = email.ToLowerInvariant();
             return _context.User.Any(x => string.Equals(x.Email, email));
+        }
+
+        public new List<UserDTO> GetAll()
+        {
+            return _context.User
+                .Include(x => x.Project)
+                .ToList();
+        }
+
+        public new UserDTO Get(int id)
+        {
+            return _context.User
+                .Include(x => x.Project)
+                .FirstOrDefault(x => x.Id == id);
         }
     }
 }
