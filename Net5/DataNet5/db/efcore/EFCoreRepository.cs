@@ -40,7 +40,10 @@ namespace Data
 
             return entity;
         }
-
+        public TEntity Get(int id)
+        {
+            return context.Set<TEntity>().Find(id);
+        }
         public async Task<TEntity> GetAsync(int id)
         {
             return await context.Set<TEntity>().FindAsync(id);
