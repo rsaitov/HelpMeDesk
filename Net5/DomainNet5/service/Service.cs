@@ -42,6 +42,11 @@ namespace Domain.service
             ticket.LastChangedDate = DateTime.Now;
             return _ticketRepository.Update(ticket);
         }
+        public TicketCommentDTO AddTicketComment(TicketCommentDTO comment)
+        {
+            return _ticketCommentRepository.Add(comment);
+        }
+
         public TicketDTO GetTicket(int id)
         {
             return _ticketRepository.Get(id);
