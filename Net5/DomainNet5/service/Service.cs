@@ -66,6 +66,11 @@ namespace Domain.service
             return _userRepository.GetAll();
         }
 
+        public ProjectDTO GetProject(int id)
+        {
+            return _projectRepository.Get(id);
+        }
+
         public bool CheckUserExists(string email)
         {
             return _userRepository.Exists(email);

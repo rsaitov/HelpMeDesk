@@ -18,6 +18,8 @@ namespace Domain.service
         IEnumerable<ProjectDTO> GetAllProjects();
         IEnumerable<UserDTO> GetAllUsers();
 
+        ProjectDTO GetProject(int id);
+
         bool CheckUserExists(string email);
         UserDTO GetUser(int id);
         UserDTO GetUser(string email);

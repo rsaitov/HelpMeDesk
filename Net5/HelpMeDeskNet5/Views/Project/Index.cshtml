@@ -1,0 +1,25 @@
+﻿@{ 
+    ViewData["Title"] = "Клиенты";
+}
+
+@model ProjectListViewModel
+
+<div class="container">
+    <table class="table table-sm table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model.Projects)
+            {
+                <tr>
+                    <th scope="row">@project.Id</th>
+                    <td><a asp-controller="Project" asp-route-id="@project.Id">@project.Name</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
