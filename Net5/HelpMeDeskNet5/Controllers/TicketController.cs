@@ -21,20 +21,7 @@ namespace HelpMeDeskNet5.Controllers
             _service = service;
             _mapper = mapper;
         }
-        //public IActionResult Index()
-        //{
-        //    var tickets = _service.GetAllTickets();
-        //    var model = new TicketListViewModel
-        //    {
-        //        Tickets = tickets
-        //    };
 
-        //    return View(model);
-        //}
-
-        [Route("")]
-        [Route("Ticket")]
-        [Route("Ticket/{id?}")]
         public IActionResult Index(int? id)
         {
             if (id == null)
@@ -100,6 +87,22 @@ namespace HelpMeDeskNet5.Controllers
             model.Projects = _service.GetAllProjects();
             model.Users = _service.GetAllUsers();
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Comment(int id, string comment)
+        {
+            var ticket = _service.GetTicket(id);
+            if (ticket == null)
+                return NotFound();
+
+            var newTicketComment = new TicketCommentDTO(id, DateTime.Now, comment);
+            var addedTicketComment = _service.AddTicketComment(newTicketComment);
+            if (addedTicketComment == null)
+                return StatusCode(400);
+
+            return View("Detail", ConstructTicketViewModel(id));
         }
 
         private TicketViewModel ConstructTicketViewModel(int? id)
