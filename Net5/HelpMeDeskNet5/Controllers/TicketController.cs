@@ -39,7 +39,7 @@ namespace HelpMeDeskNet5.Controllers
         {
             if (id == null)
             {
-                var tickets = _service.GetAllTickets();
+                var tickets = _service.GetAllTickets().OrderByDescending(x => x.Id);
                 var model = new TicketListViewModel
                 {
                     Tickets = tickets
