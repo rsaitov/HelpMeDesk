@@ -42,9 +42,28 @@ namespace Domain.service
             ticket.LastChangedDate = DateTime.Now;
             return _ticketRepository.Update(ticket);
         }
-        public TicketCommentDTO AddTicketComment(TicketCommentDTO comment)
+        public TicketCommentDTO AddTicketComment(TicketCommentDTO comment, string userEmail)
         {
+            if (!HaveAccessToComment(comment.ticket, userEmail))
+                return null;
+
             return _ticketCommentRepository.Add(comment);
+        }
+        public bool HaveAccessToComment(TicketDTO ticket, string userEmail)
+        {
+            if (ticket == null)
+                return false;
+
+            var user = GetUser(userEmail);
+            if (user == null)
+                return false;
+
+            if (user.Role == UserRole.Executor ||
+                user.Role == UserRole.Administrator ||
+                user.Id == ticket.AuthorId)
+                return true;
+
+            return false;
         }
 
         public TicketDTO GetTicket(int id)

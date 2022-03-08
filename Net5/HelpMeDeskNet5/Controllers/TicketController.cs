@@ -80,7 +80,7 @@ namespace HelpMeDeskNet5.Controllers
                 else
                     _service.EditTicket(ticket);
 
-                return RedirectToAction("Detail", new { id = ticket.Id });
+                return RedirectToAction("Index", new { id = ticket.Id });
             }
 
             model.TicketStatuses = _service.GetAllTicketStatuses();
@@ -88,6 +88,7 @@ namespace HelpMeDeskNet5.Controllers
             model.Users = _service.GetAllUsers();
             return View(model);
         }
+        private bool GetCommentAccess(TicketDTO ticket, string email) => _service.HaveAccessToComment(ticket, email);
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -98,7 +99,7 @@ namespace HelpMeDeskNet5.Controllers
                 return NotFound();
 
             var newTicketComment = new TicketCommentDTO(id, DateTime.Now, comment);
-            var addedTicketComment = _service.AddTicketComment(newTicketComment);
+            var addedTicketComment = _service.AddTicketComment(newTicketComment, HttpContext.User.Identity.Name);
             if (addedTicketComment == null)
                 return StatusCode(400);
 
@@ -114,6 +115,7 @@ namespace HelpMeDeskNet5.Controllers
             model.Projects = _service.GetAllProjects();
             model.Users = _service.GetAllUsers();
             model.User = _service.GetUser(User.Identity.Name);
+            model.CommentAccess = GetCommentAccess(ticket, HttpContext.User.Identity.Name);
 
             return model;
         }

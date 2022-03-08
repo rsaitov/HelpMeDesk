@@ -89,8 +89,10 @@
             </div>
         </div>
 
-        <div class="row mb-4">
-            <div class="col-md-2 mb-0">
+        @if (Model.CommentAccess)
+        {
+            <div class="row mb-4">
+                <div class="col-md-2 mb-0">
             </div>
             <div class="col-md-10">
                 <form asp-controller="Ticket" asp-action="Comment" asp-anti-forgery="true">
@@ -102,6 +104,7 @@
                 </form>
             </div>
         </div>
+        }
 
         @foreach (var comment in Model.Comments.OrderByDescending(x => x.PublishDate))
         {
