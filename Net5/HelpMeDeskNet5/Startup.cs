@@ -28,11 +28,11 @@ namespace HelpMeDeskNet5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<EfCoreProjectRepository>();
-            services.AddScoped<EfCoreUserRepository>();
-            services.AddScoped<EfCoreTicketRepository>();
-            services.AddScoped<EfCoreTicketCommentRepository>();
-            services.AddScoped<EfCoreTicketStatusRepository>();
+            services.AddTransient<IRepositoryUser, EFRepositoryUser>();
+            services.AddTransient<IRepositoryProject, EFRepositoryProject>();
+            services.AddTransient<IRepositoryTicket, EFRepositoryTicket>();
+            services.AddTransient<IRepositoryTicketComment, EFRepositoryTicketComment>();
+            services.AddTransient<IRepositoryTicketStatus, EFRepositoryTicketStatus>();
             services.AddTransient<IService, Service>();
 
             var mapperConfig = new MapperConfiguration(mc =>

@@ -9,18 +9,18 @@ namespace Domain.service
 {
     public class Service : IService
     {
-        private EfCoreTicketRepository _ticketRepository;
-        private EfCoreProjectRepository _projectRepository;
-        private EfCoreUserRepository _userRepository;
-        private EfCoreTicketCommentRepository _ticketCommentRepository;
-        private EfCoreTicketStatusRepository _ticketStatusRepository;
+        private IRepositoryProject _projectRepository;
+        private IRepositoryUser _userRepository;
+        private IRepositoryTicketComment _ticketCommentRepository;
+        private IRepositoryTicketStatus _ticketStatusRepository;
+        private IRepositoryTicket _ticketRepository;
 
         public Service(
-            EfCoreProjectRepository projectRepository,
-            EfCoreUserRepository userRepository,
-            EfCoreTicketCommentRepository ticketCommentRepository,
-            EfCoreTicketStatusRepository ticketStatusRepository,
-            EfCoreTicketRepository ticketRepository)
+            IRepositoryProject projectRepository,
+            IRepositoryUser userRepository,
+            IRepositoryTicketComment ticketCommentRepository,
+            IRepositoryTicketStatus ticketStatusRepository,
+            IRepositoryTicket ticketRepository)
         {
             _ticketRepository = ticketRepository;
             _projectRepository = projectRepository;
@@ -34,7 +34,7 @@ namespace Domain.service
             var date = DateTime.Now;
             ticket.CreationDate = date;
             ticket.LastChangedDate = date;
-            return _ticketRepository.Add(ticket);
+            return _ticketRepository.Insert(ticket);
         }
 
         public TicketDTO EditTicket(TicketDTO ticket)
@@ -47,7 +47,7 @@ namespace Domain.service
             if (!HaveAccessToComment(comment.ticket, userEmail))
                 return null;
 
-            return _ticketCommentRepository.Add(comment);
+            return _ticketCommentRepository.Insert(comment);
         }
         public bool HaveAccessToComment(TicketDTO ticket, string userEmail)
         {
@@ -68,31 +68,31 @@ namespace Domain.service
 
         public TicketDTO GetTicket(int id)
         {
-            return _ticketRepository.Get(id);
+            return _ticketRepository.Select(id);
         }
         public IEnumerable<TicketDTO> GetAllTickets()
         {
-            return _ticketRepository.GetAll();
+            return _ticketRepository.SelectAll();
         }
 
         public IEnumerable<TicketStatusDTO> GetAllTicketStatuses()
         {
-            return _ticketStatusRepository.GetAll();
+            return _ticketStatusRepository.SelectAll();
         }
 
         public IEnumerable<ProjectDTO> GetAllProjects()
         {
-            return _projectRepository.GetAll();
+            return _projectRepository.SelectAll();
         }
 
         public IEnumerable<UserDTO> GetAllUsers()
         {
-            return _userRepository.GetAll();
+            return _userRepository.SelectAll();
         }
 
         public ProjectDTO GetProject(int id)
         {
-            return _projectRepository.Get(id);
+            return _projectRepository.Select(id);
         }
 
         public bool CheckUserExists(string email)
@@ -101,15 +101,15 @@ namespace Domain.service
         }
         public UserDTO GetUser(string email)
         {
-            return _userRepository.Get(email);
+            return _userRepository.SelectByEmail(email);
         }
         public UserDTO GetUser(int id)
         {
-            return _userRepository.Get(id);
+            return _userRepository.Select(id);
         }
         public UserDTO CheckUser(string email, string password)
         {
-            return _userRepository.Get(email, password);
+            return _userRepository.SelectByEmail(email, password);
         }
 
         public void RegisterUser(string email, string name, string password, int projectId)
@@ -125,7 +125,7 @@ namespace Domain.service
                 role: UserRole.User,
                 projectId: projectId);
 
-            _userRepository.Add(user);
+            _userRepository.Insert(user);
         }
     }
 }
