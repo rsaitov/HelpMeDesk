@@ -82,10 +82,10 @@ Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. ";
             if (!context.TicketComment.Any())
             {
                 context.TicketComment.AddRange(
-                    new TicketCommentDTO(ticketId1, yesterday, "This is first comment"),
-                    new TicketCommentDTO(ticketId1, yesterday, "This is second comment"),
-                    new TicketCommentDTO(ticketId1, today, "This is third comment"),
-                    new TicketCommentDTO(ticketId1, today, "This is fourth comment")
+                    new TicketCommentDTO(ticketId1, yesterday, "This is first comment", userId1),
+                    new TicketCommentDTO(ticketId1, yesterday, "This is second comment", userId1),
+                    new TicketCommentDTO(ticketId1, today, "This is third comment", userId1),
+                    new TicketCommentDTO(ticketId1, today, "This is fourth comment", userId1)
                 );
             }
 

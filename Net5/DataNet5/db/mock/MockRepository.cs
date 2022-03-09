@@ -54,10 +54,10 @@ Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi. ";
             };
 
             _ticketComments = new List<TicketCommentDTO>() {
-                new TicketCommentDTO(1, yesterday, "This is first comment"),
-                new TicketCommentDTO(1, yesterday, "This is second comment"),
-                new TicketCommentDTO(1, today, "This is third comment"),
-                new TicketCommentDTO(1, today, "This is fourth comment"),
+                new TicketCommentDTO(1, yesterday, "This is first comment", _users.First().Id),
+                new TicketCommentDTO(1, yesterday, "This is second comment", _users.First().Id),
+                new TicketCommentDTO(1, today, "This is third comment", _users.First().Id),
+                new TicketCommentDTO(1, today, "This is fourth comment", _users.First().Id),
             };
 
             _tickets.First().Author = _users.First(x => x.Role == UserRole.User);

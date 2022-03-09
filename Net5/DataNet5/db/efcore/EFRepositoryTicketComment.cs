@@ -18,12 +18,14 @@ namespace Data
         public IEnumerable<TicketCommentDTO> SelectAll()
         {
             return _context.TicketComment
+                .Include(x => x.Author)
                 .ToList();
         }
 
         public TicketCommentDTO Select(int id)
         {
             return _context.TicketComment
+                .Include(x => x.Author)
                 .FirstOrDefault(x => x.Id == id);
         }
         public TicketCommentDTO Insert(TicketCommentDTO ticketComment)

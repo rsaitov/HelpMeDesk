@@ -51,7 +51,7 @@ namespace Test.test_db
             var tickets = _service.GetAllTickets();
             var firstTicket = tickets.FirstOrDefault(x => x.AuthorId != clientUser.Id);
 
-            var ticketComment = new TicketCommentDTO(firstTicket.Id, DateTime.Now, "my comment");
+            var ticketComment = new TicketCommentDTO(firstTicket.Id, DateTime.Now, "my comment", clientUser.Id);
 
             var addedComment = _service.AddTicketComment(ticketComment, clientUser.Email);
             Assert.IsNull(addedComment);
@@ -65,7 +65,7 @@ namespace Test.test_db
             var tickets = _service.GetAllTickets();
             var firstTicket = tickets.FirstOrDefault(x => x.AuthorId != adminUser.Id);
 
-            var ticketComment = new TicketCommentDTO(firstTicket.Id, DateTime.Now, "my comment");
+            var ticketComment = new TicketCommentDTO(firstTicket.Id, DateTime.Now, "my comment", adminUser.Id);
 
             var addedComment = _service.AddTicketComment(ticketComment, adminUser.Email);
             Assert.IsNotNull(addedComment);            

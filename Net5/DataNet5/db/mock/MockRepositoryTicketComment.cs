@@ -15,10 +15,10 @@ namespace Data
             var yesterday = today.AddDays(-1);
 
             _ticketComments = new List<TicketCommentDTO>() {
-                new TicketCommentDTO(1, yesterday, "This is first comment"),
-                new TicketCommentDTO(1, yesterday, "This is second comment"),
-                new TicketCommentDTO(1, today, "This is third comment"),
-                new TicketCommentDTO(1, today, "This is fourth comment"),
+                new TicketCommentDTO(1, yesterday, "This is first comment", authorId: 1),
+                new TicketCommentDTO(1, yesterday, "This is second comment", authorId: 1),
+                new TicketCommentDTO(1, today, "This is third comment", authorId: 1),
+                new TicketCommentDTO(1, today, "This is fourth comment", authorId: 1),
             };
         }
         public IEnumerable<TicketCommentDTO> SelectAll()
