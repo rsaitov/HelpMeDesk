@@ -4,6 +4,7 @@ using HelpMeDeskNet5.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -30,14 +31,23 @@ namespace HelpMeDeskNet5.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _service.CheckUser(model.Email, model.Password);                    
-                if (user != null)
+                var user = _service.CheckUser(model.Email, model.Password);
+                if (user == null)
                 {
-                    await Authenticate(model.Email); 
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                    return View(model);
                 }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+
+                if (!user.EmailConfirmed)
+                {
+                    ModelState.AddModelError(nameof(user.Email), "EMail не подтверждён");
+                    return View(model);
+                }
+
+                await Authenticate(model.Email);
+                return RedirectToAction("Index", "Home");
             }
+
             return View(model);
         }
         [HttpGet]

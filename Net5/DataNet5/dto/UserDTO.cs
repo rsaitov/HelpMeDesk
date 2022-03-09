@@ -12,6 +12,7 @@ namespace Data
         public UserRole Role { get; set; }
         public int ProjectId { get; set; }
         public virtual ProjectDTO Project { get; set; }
+        public bool EmailConfirmed { get; set; }
 
         public UserDTO(string email, string name, string password, string phone, UserRole role, int projectId)
         {
