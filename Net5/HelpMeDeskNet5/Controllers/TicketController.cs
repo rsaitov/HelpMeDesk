@@ -99,6 +99,7 @@ namespace HelpMeDeskNet5.Controllers
                 return NotFound();
 
             var newTicketComment = new TicketCommentDTO(id, DateTime.Now, comment);
+            newTicketComment.ticket = ticket;
             var addedTicketComment = _service.AddTicketComment(newTicketComment, HttpContext.User.Identity.Name);
             if (addedTicketComment == null)
                 return StatusCode(400);
