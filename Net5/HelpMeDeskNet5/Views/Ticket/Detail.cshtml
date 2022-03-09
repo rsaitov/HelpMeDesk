@@ -93,17 +93,17 @@
         {
             <div class="row mb-4">
                 <div class="col-md-2 mb-0">
+                </div>
+                <div class="col-md-10">
+                    <form asp-controller="Ticket" asp-action="Comment" asp-anti-forgery="true">
+                        <input name="id" value="@Model.Id" hidden />
+                        <div class="form-group">
+                            <textarea class="form-control" type="textarea" name="comment"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Добавить</button>
+                    </form>
+                </div>
             </div>
-            <div class="col-md-10">
-                <form asp-controller="Ticket" asp-action="Comment" asp-anti-forgery="true">
-                    <input name="id" value="@Model.Id" hidden />
-                    <div class="form-group">
-                        <textarea class="form-control" type="textarea" name="comment"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success">Добавить</button>
-                </form>
-            </div>
-        </div>
         }
 
         @foreach (var comment in Model.Comments.OrderByDescending(x => x.PublishDate))
@@ -113,7 +113,7 @@
                     <span class="float-right font-weight-bold">@comment.Author.Name:</span>
                     <br>
                     <span class="float-right small">@comment.PublishDate.ToShortDateString() @comment.PublishDate.ToShortTimeString()</span>
-                </div>                
+                </div>
                 <div class="col-md-10">
                     <p>@comment.Comment</p>
                 </div>

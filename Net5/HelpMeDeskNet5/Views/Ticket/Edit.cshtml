@@ -10,7 +10,7 @@
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-3">
-                    <h3>@(@Model.Id == 0 ? "Новая заявка" : $"Заявка №{Model.Id}")</h3>
+                    <h3>@((@Model.Id == null || @Model.Id == 0) ? "Новая заявка" : $"Заявка №{Model.Id}")</h3>
                 </div>
             </div>
 
@@ -19,13 +19,26 @@
                     <label class="float-right mt-1" asp-for="@Model.ProjectId">Проект:</label>
                 </div>
                 <div class="col-md-10">
-                    <select class="form-control" asp-for="@Model.ProjectId">
-                        @foreach (var project in @Model.Projects)
+                    @if (Model.User.Role == UserRole.User || Model.User.Role == UserRole.Executor)
+                    {
+                        @if (Model.ProjectId == 0)
                         {
-                            <option value="@project.Id">@project.Name</option>
-
+                            Model.ProjectId = Model.User.Project.Id;
+                            Model.Project = Model.User.Project;
                         }
-                    </select>
+
+                        <input class="form-control" value="@Model.Project.Name" disabled/>
+                        <input asp-for="@Model.ProjectId" hidden />
+                    }
+                    else if (Model.User.Role == UserRole.Administrator)
+                    {
+                        <select class="form-control" asp-for="@Model.ProjectId">
+                            @foreach (var project in @Model.Projects)
+                            {
+                                <option value="@project.Id">@project.Name</option>
+                            }
+                        </select>
+                    }
                 </div>
             </div>
 
@@ -34,29 +47,52 @@
                     <label class="float-right mt-1" asp-for="@Model.AuthorId">Автор:</label>
                 </div>
                 <div class="col-md-10">
-                    <select class="form-control" asp-for="@Model.AuthorId">
-                        @foreach (var user in @Model.Users)
+                    @if (Model.User.Role == UserRole.User || Model.User.Role == UserRole.Executor)
+                    {
+                        @if (Model.AuthorId == null || Model.AuthorId == 0)
                         {
-                            <option value="@user.Id">@user.Name</option>
+                            Model.AuthorId = Model.User.Id;
+                            Model.Author = Model.User;
                         }
-                    </select>
+
+
+                        <input class="form-control" value="@Model.Author.Name" disabled />
+                        <input asp-for="@Model.AuthorId" hidden />
+                    }
+                    else if (Model.User.Role == UserRole.Administrator)
+                    {
+                        <select class="form-control" asp-for="@Model.AuthorId">
+                            @foreach (var user in @Model.Users)
+                            {
+                                <option value="@user.Id">@user.Name</option>
+                            }
+                        </select>
+                    }
                 </div>
             </div>
 
-            <div class="row mt-2 form-group">
-                <div class="col-md-2">
-                    <label class="float-right mt-1" asp-for="@Model.ExecutorId">Исполнитель:</label>
-                </div>
-                <div class="col-md-10">
-                    <select class="form-control" asp-for="@Model.ExecutorId">
-                        @foreach (var user in @Model.Users)
-                        {
-                            <option value="@user.Id">@user.Name</option>
+            @if (Model.User.Role == UserRole.Administrator)
+            {
+                <div class="row mt-2 form-group">
+                    <div class="col-md-2">
+                        <label class="float-right mt-1" asp-for="@Model.ExecutorId">Исполнитель:</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select class="form-control" asp-for="@Model.ExecutorId">
+                            @foreach (var user in @Model.Users)
+                            {
+                                <option value="@user.Id">@user.Name</option>
 
-                        }
-                    </select>
+                            }
+                        </select>
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                if (Model.ExecutorId == 0)
+                    Model.ExecutorId = null;
+            }
 
             <div class="row mt-2">
                 <div class="col-md-2">

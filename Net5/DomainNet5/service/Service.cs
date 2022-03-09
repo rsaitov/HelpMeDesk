@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.service
 {
@@ -31,6 +32,8 @@ namespace Domain.service
             var date = DateTime.Now;
             ticket.CreationDate = date;
             ticket.LastChangedDate = date;
+            if (ticket.ExecutorId == 0)
+                ticket.ExecutorId = null;
             return _ticketRepository.Insert(ticket);
         }
         public TicketDTO EditTicket(TicketDTO ticket)
@@ -117,8 +120,8 @@ namespace Domain.service
                 return;
 
             var user = new UserDTO(
-                email.ToLower(), 
-                name, 
+                email.ToLower(),
+                name,
                 password,
                 phone: "",
                 role: UserRole.User,
