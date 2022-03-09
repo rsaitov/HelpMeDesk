@@ -21,7 +21,7 @@ namespace HelpMeDeskNet5.Controllers
             _service = service;
             _mapper = mapper;
         }
-
+        [Route("Ticket")]
         public IActionResult Index(int? id)
         {
             if (id == null)
@@ -61,6 +61,7 @@ namespace HelpMeDeskNet5.Controllers
         }
 
         //GET - EDIT
+        [Route("Ticket/Edit")]
         public IActionResult Edit(int? id)
         {
             var viewModel = ConstructTicketViewModel(id);
@@ -90,6 +91,11 @@ namespace HelpMeDeskNet5.Controllers
         }
         private bool GetCommentAccess(TicketDTO ticket, string email) => _service.HaveAccessToComment(ticket, email);
 
+        private UserDTO GetCurrentUser()
+        {
+            var email = HttpContext.User.Identity.Name;
+            return _service.GetUser(email);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Comment(int id, string comment)
@@ -98,9 +104,13 @@ namespace HelpMeDeskNet5.Controllers
             if (ticket == null)
                 return NotFound();
 
-            var newTicketComment = new TicketCommentDTO(id, DateTime.Now, comment);
+            var user = GetCurrentUser();
+            if (user == null)
+                return StatusCode(401);
+
+            var newTicketComment = new TicketCommentDTO(id, DateTime.Now, comment, user.Id);
             newTicketComment.ticket = ticket;
-            var addedTicketComment = _service.AddTicketComment(newTicketComment, HttpContext.User.Identity.Name);
+            var addedTicketComment = _service.AddTicketComment(newTicketComment, user.Email);
             if (addedTicketComment == null)
                 return StatusCode(400);
 
