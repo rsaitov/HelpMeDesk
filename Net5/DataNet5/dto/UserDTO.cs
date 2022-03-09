@@ -22,5 +22,10 @@ namespace Data
             Role = role;
             ProjectId = projectId;
         }
+        public UserDTO(int id, string email, string name, string password, string phone, UserRole role, int projectId) 
+            : this(email, name, password, phone, role, projectId)
+        {
+            Id = id;
+        }
     }
 }
