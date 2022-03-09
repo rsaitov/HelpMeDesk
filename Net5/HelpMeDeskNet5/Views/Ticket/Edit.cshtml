@@ -55,7 +55,6 @@
                             Model.Author = Model.User;
                         }
 
-
                         <input class="form-control" value="@Model.Author.Name" disabled />
                         <input asp-for="@Model.AuthorId" hidden />
                     }
@@ -82,16 +81,10 @@
                             @foreach (var user in @Model.Users)
                             {
                                 <option value="@user.Id">@user.Name</option>
-
                             }
                         </select>
                     </div>
                 </div>
-            }
-            else
-            {
-                if (Model.ExecutorId == 0)
-                    Model.ExecutorId = null;
             }
 
             <div class="row mt-2">
