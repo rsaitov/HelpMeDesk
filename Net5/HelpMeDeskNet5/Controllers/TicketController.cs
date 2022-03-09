@@ -6,6 +6,7 @@ using HelpMeDeskNet5.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,14 +27,24 @@ namespace HelpMeDeskNet5.Controllers
         {
             if (id == null)
             {
+                var currentUser = GetCurrentUser();
+                if (currentUser == null)
+                    return StatusCode(401);
+
                 var tickets = _service.GetAllTickets().OrderByDescending(x => x.Id);
+                List<TicketDTO> filteredTickets = null;
+
+                if (currentUser.Role == UserRole.User)
+                    filteredTickets = tickets.Where(x => x.AuthorId == currentUser.Id).ToList();
+                if (currentUser.Role == UserRole.Executor)
+                    filteredTickets = tickets.Where(x => x.ProjectId == currentUser.ProjectId).ToList();
+
                 var model = new TicketListViewModel
                 {
-                    Tickets = tickets
+                    Tickets = filteredTickets ?? tickets.ToList()
                 };
 
                 return View(model);
-                //return NotFound();
             }
 
             var viewModel = ConstructTicketViewModel(id);
@@ -69,6 +80,7 @@ namespace HelpMeDeskNet5.Controllers
         }
 
         //POST - EDIT
+        [Route("Ticket/Edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(TicketViewModel model)
