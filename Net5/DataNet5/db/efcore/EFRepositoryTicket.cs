@@ -15,7 +15,7 @@ namespace Data
             _context = context;
         }
 
-        public List<TicketDTO> SelectAll()
+        public IEnumerable<TicketDTO> SelectAll()
         {
             return _context.Ticket
                 .Include(x => x.Project)

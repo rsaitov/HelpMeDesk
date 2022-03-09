@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Ticket : TicketDTO
-    {
-    }
+    //public class Ticket : TicketDTO
+    //{
+    //}
 }

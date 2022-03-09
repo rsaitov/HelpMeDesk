@@ -50,7 +50,7 @@ namespace HelpMeDeskNet5.Controllers
         //POST - CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Ticket obj)
+        public IActionResult Create(TicketDTO obj)
         {
             if (ModelState.IsValid)
             {

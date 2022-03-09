@@ -9,9 +9,6 @@ namespace HelpMeDeskNet5
     {
         public MappingProfile()
         {
-            CreateMap<Ticket, TicketDTO>();
-            CreateMap<TicketDTO, Ticket>();
-
             CreateMap<TicketDTO, TicketViewModel>();
             CreateMap<TicketViewModel, TicketDTO>();
 

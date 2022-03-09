@@ -12,7 +12,7 @@ namespace Data
             _context = context;
         }
 
-        public List<ProjectDTO> SelectAll()
+        public IEnumerable<ProjectDTO> SelectAll()
         {
             return _context.Project
                 .ToList();

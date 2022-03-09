@@ -12,7 +12,7 @@ namespace Data
             _context = context;
         }
 
-        public List<UserDTO> SelectAll()
+        public IEnumerable<UserDTO> SelectAll()
         {
             return _context.User
                 .Include(x => x.Project)

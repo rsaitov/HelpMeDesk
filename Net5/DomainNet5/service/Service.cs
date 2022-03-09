@@ -1,9 +1,6 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.service
 {
@@ -36,7 +33,6 @@ namespace Domain.service
             ticket.LastChangedDate = date;
             return _ticketRepository.Insert(ticket);
         }
-
         public TicketDTO EditTicket(TicketDTO ticket)
         {
             ticket.LastChangedDate = DateTime.Now;
@@ -44,7 +40,10 @@ namespace Domain.service
         }
         public TicketCommentDTO AddTicketComment(TicketCommentDTO comment, string userEmail)
         {
-            if (!HaveAccessToComment(comment.ticket, userEmail))
+            var ticket = _ticketRepository.Select(comment.TicketId);
+            if (ticket == null)
+                return null;
+            if (!HaveAccessToComment(ticket, userEmail))
                 return null;
 
             return _ticketCommentRepository.Insert(comment);

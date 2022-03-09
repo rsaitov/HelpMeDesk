@@ -15,7 +15,13 @@ namespace Test.test_db
 
         public TicketTests()
         {
-            
+            _service = new Service(
+                new MockRepositoryProject(),
+                new MockRepositoryUser(),
+                new MockRepositoryTicketComment(),
+                new MockRepositoryTicketStatus(),
+                new MockRepositoryTicket()
+                );
         }
 
         [SetUp]
@@ -25,7 +31,7 @@ namespace Test.test_db
         }
 
         [Test]
-        public void Comment_NoAccess()
+        public void HaveAccessToComment_NoAccess()
         {
             var users = _service.GetAllUsers();
             var clientUser = users.FirstOrDefault(x => x.Role == UserRole.User);
@@ -35,6 +41,34 @@ namespace Test.test_db
 
             var haveAccess = _service.HaveAccessToComment(firstTicket, clientUser.Email);
             Assert.IsFalse(haveAccess);
+        }
+        [Test]
+        public void TryToComment_NoAccess()
+        {
+            var users = _service.GetAllUsers();
+            var clientUser = users.FirstOrDefault(x => x.Role == UserRole.User);
+
+            var tickets = _service.GetAllTickets();
+            var firstTicket = tickets.FirstOrDefault(x => x.AuthorId != clientUser.Id);
+
+            var ticketComment = new TicketCommentDTO(firstTicket.Id, DateTime.Now, "my comment");
+
+            var addedComment = _service.AddTicketComment(ticketComment, clientUser.Email);
+            Assert.IsNull(addedComment);
+        }
+        [Test]
+        public void TryToCommentByAdmin_Success()
+        {
+            var users = _service.GetAllUsers();
+            var adminUser = users.FirstOrDefault(x => x.Role == UserRole.Administrator);
+
+            var tickets = _service.GetAllTickets();
+            var firstTicket = tickets.FirstOrDefault(x => x.AuthorId != adminUser.Id);
+
+            var ticketComment = new TicketCommentDTO(firstTicket.Id, DateTime.Now, "my comment");
+
+            var addedComment = _service.AddTicketComment(ticketComment, adminUser.Email);
+            Assert.IsNotNull(addedComment);            
         }
     }
 }

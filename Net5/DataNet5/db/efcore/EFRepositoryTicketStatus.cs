@@ -15,7 +15,7 @@ namespace Data
             _context = context;
         }
 
-        public List<TicketStatusDTO> SelectAll()
+        public IEnumerable<TicketStatusDTO> SelectAll()
         {
             return _context.TicketStatus
                 .ToList();

@@ -4,7 +4,7 @@ namespace Data
 {
     public interface IRepositoryUser
     {
-        List<UserDTO> SelectAll();
+        IEnumerable<UserDTO> SelectAll();
         UserDTO Select(int id);
         UserDTO Insert(UserDTO user);
         UserDTO Update(UserDTO user);
@@ -15,7 +15,7 @@ namespace Data
 
     public interface IRepositoryProject
     {
-        List<ProjectDTO> SelectAll();
+        IEnumerable<ProjectDTO> SelectAll();
         ProjectDTO Select(int id);
         ProjectDTO Insert(ProjectDTO project);
         ProjectDTO Update(ProjectDTO project);
@@ -23,7 +23,7 @@ namespace Data
 
     public interface IRepositoryTicket
     {
-        List<TicketDTO> SelectAll();
+        IEnumerable<TicketDTO> SelectAll();
         TicketDTO Select(int id);
         TicketDTO Insert(TicketDTO ticket);
         TicketDTO Update(TicketDTO ticket);
@@ -31,7 +31,7 @@ namespace Data
 
     public interface IRepositoryTicketStatus
     {
-        List<TicketStatusDTO> SelectAll();
+        IEnumerable<TicketStatusDTO> SelectAll();
         TicketStatusDTO Select(int id);
         TicketStatusDTO Insert(TicketStatusDTO ticketStatus);
         TicketStatusDTO Update(TicketStatusDTO ticketStatus);
@@ -39,9 +39,9 @@ namespace Data
     
     public interface IRepositoryTicketComment
     {
-        List<TicketCommentDTO> SelectAll();
+        IEnumerable<TicketCommentDTO> SelectAll();
         TicketCommentDTO Select(int id);
-        TicketCommentDTO Insert(TicketCommentDTO ticketStatus);
-        TicketCommentDTO Update(TicketCommentDTO ticketStatus);
+        TicketCommentDTO Insert(TicketCommentDTO ticketComment);
+        TicketCommentDTO Update(TicketCommentDTO ticketComment);
     }
 }

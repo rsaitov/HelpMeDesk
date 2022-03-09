@@ -51,10 +51,19 @@ namespace Data
             ExecutorId = executorId;
         }
 
+        public TicketDTO(int id, int projectId, int authorId, string name, string description,
+            DateTime creationDate, DateTime lastChangedDate, int statusId, TicketOrigin origin, TicketPriority priority,
+            int executorId)
+            :
+            this(projectId, authorId, name, description,
+            creationDate, lastChangedDate, statusId, origin, priority,
+            executorId)
+        {
+            Id = id;
+        }
         public TicketDTO()
         {
 
         }
-
     }
 }
