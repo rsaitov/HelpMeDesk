@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class MockRepository : IRepository<IEntity>
+    public class MockRepository
     {
         private IEnumerable<UserDTO> _users;
         private IEnumerable<ProjectDTO> _projects;
