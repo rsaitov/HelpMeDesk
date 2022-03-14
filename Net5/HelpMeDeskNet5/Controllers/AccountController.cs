@@ -59,7 +59,7 @@ namespace HelpMeDeskNet5.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public IActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,8 @@ namespace HelpMeDeskNet5.Controllers
                 if (!userExists)
                 {
                     _service.RegisterUser(model.Email, model.Name, model.Password, model.ProjectId);
-                    await Authenticate(model.Email);
-                    return RedirectToAction("Index", "Home");
+                    //await Authenticate(model.Email);
+                    return View("WaitingForEmailConfirm");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
