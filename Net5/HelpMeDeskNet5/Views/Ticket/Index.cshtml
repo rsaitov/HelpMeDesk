@@ -1,4 +1,7 @@
 ﻿@model TicketListViewModel
+@{
+    ViewData["Title"] = "Заявки";
+}
 
 <div class="container">
     <table class="table table-sm table-striped">
@@ -20,15 +23,15 @@
         <tbody class="small">
             @foreach (var ticket in Model.Tickets)
             {
-            <tr>
-                <th scope="row">@ticket.Id</th>
-                <td><a asp-controller="Ticket" asp-route-id="@ticket.Id">@ticket.Name</a></td>
-                <td><a asp-controller="Project" asp-action="Index" asp-route-id="@ticket.ProjectId">@ticket.Project.Name</a></td>
-                <td>@ticket.CreationDate.ToShortDateString() @ticket.CreationDate.ToShortTimeString()</td>
-                <td>@ticket.LastChangedDate.Value.ToShortDateString() @ticket.LastChangedDate.Value.ToShortTimeString()</td>
+                <tr>
+                    <th scope="row">@ticket.Id</th>
+                    <td><a asp-controller="Ticket" asp-route-id="@ticket.Id">@ticket.Name</a></td>
+                    <td><a asp-controller="Project" asp-action="Index" asp-route-id="@ticket.ProjectId">@ticket.Project.Name</a></td>
+                    <td>@ticket.CreationDate.ToShortDateString() @ticket.CreationDate.ToShortTimeString()</td>
+                    <td>@ticket.LastChangedDate.Value.ToShortDateString() @ticket.LastChangedDate.Value.ToShortTimeString()</td>
 
-                <td>
-                    <a href="#" class="badge badge-pill @(ticket.Status.Name == "New" ? "badge-secondary" :
+                    <td>
+                        <a href="#" class="badge badge-pill @(ticket.Status.Name == "New" ? "badge-secondary" :
                     (ticket.Status.Name == "In progress" ? "badge-primary" :
                     (ticket.Status.Name == "Delayed" ? "badge-warning" :
                     (ticket.Status.Name == "Solved" ? "badge-success" : "badge-dark")))
@@ -40,8 +43,8 @@
             <td>@ticket.Origin</td>
             <td><a asp-controller="User" asp-action="Index" asp-route-id="@ticket.AuthorId">@ticket.Author.Name</a></td>
             <td><a asp-controller="User" asp-action="Index" asp-route-id="@ticket.Executor?.Id">@ticket.Executor?.Name</a></td>
-            </tr>
-            }
+        </tr>
+    }
         </tbody>
     </table>
 </div>

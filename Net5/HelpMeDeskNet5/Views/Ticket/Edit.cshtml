@@ -1,4 +1,8 @@
 ﻿@model TicketViewModel
+@{
+    var title = (@Model.Id == null || @Model.Id == 0) ? "Новая заявка" : $"Заявка №{Model.Id}";
+    ViewData["Title"] = title;
+}
 
 <div class="container">
     <form method="post">
@@ -27,7 +31,7 @@
                             Model.Project = Model.User.Project;
                         }
 
-                        <input class="form-control" value="@Model.Project.Name" disabled/>
+                        <input class="form-control" value="@Model.Project.Name" disabled />
                         <input asp-for="@Model.ProjectId" hidden />
                     }
                     else if (Model.User.Role == UserRole.Administrator)

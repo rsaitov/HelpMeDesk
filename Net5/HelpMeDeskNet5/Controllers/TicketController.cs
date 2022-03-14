@@ -22,7 +22,7 @@ namespace HelpMeDeskNet5.Controllers
             _service = service;
             _mapper = mapper;
         }
-        [Route("Ticket")]
+        //[Route("Ticket")]
         public IActionResult Index(int? id)
         {
             if (id == null)
@@ -51,28 +51,8 @@ namespace HelpMeDeskNet5.Controllers
             return View("Detail", viewModel);
         }
 
-        //GET - CREATE
-        public IActionResult Create()
-        {
-            var viewModel = ConstructTicketViewModel(null);
-            return View("Edit", viewModel);
-        }
-
-        //POST - CREATE
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(TicketDTO obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _service.AddTicket(obj);
-                return RedirectToAction("Detail");
-            }
-            return View(obj);
-        }
-
         //GET - EDIT
-        [Route("Ticket/Edit")]
+        //[Route("Ticket/Edit")]
         public IActionResult Edit(int? id)
         {
             var viewModel = ConstructTicketViewModel(id);
@@ -80,7 +60,7 @@ namespace HelpMeDeskNet5.Controllers
         }
 
         //POST - EDIT
-        [Route("Ticket/Edit")]
+        //[Route("Ticket/Edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(TicketViewModel model)

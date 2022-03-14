@@ -1,59 +1,62 @@
 ﻿@model UserDTO
+@{
+    ViewData["Title"] = Model.Email;
+}
 
-    <div class="container">
-        <div class="col-md-12 order-md-1">
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <label class="float-right">ID:</label>
-                </div>
-                <div class="col-md-10">
-                    <p>@Model.Id</p>
-                </div>
+<div class="container">
+    <div class="col-md-12 order-md-1">
+        <div class="row mt-2">
+            <div class="col-md-2">
+                <label class="float-right">ID:</label>
             </div>
-
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <label class="float-right">Email:</label>
-                </div>
-                <div class="col-md-10">
-                    <p>@Model.Email</p>
-                </div>
+            <div class="col-md-10">
+                <p>@Model.Id</p>
             </div>
+        </div>
 
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <label class="float-right">Имя пользователя:</label>
-                </div>
-                <div class="col-md-10">
-                    <p>@Model.Name</p>
-                </div>
+        <div class="row mt-2">
+            <div class="col-md-2">
+                <label class="float-right">Email:</label>
             </div>
-
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <label class="float-right">Телефон:</label>
-                </div>
-                <div class="col-md-10">
-                    <p>@Model.Phone</p>
-                </div>
+            <div class="col-md-10">
+                <p>@Model.Email</p>
             </div>
+        </div>
 
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <label class="float-right">Роль:</label>
-                </div>
-                <div class="col-md-10">
-                    <p>@Model.Role</p>
-                </div>
+        <div class="row mt-2">
+            <div class="col-md-2">
+                <label class="float-right">Имя пользователя:</label>
             </div>
+            <div class="col-md-10">
+                <p>@Model.Name</p>
+            </div>
+        </div>
 
-            <div class="row mt-2">
-                <div class="col-md-2">
-                    <label class="float-right">Проект:</label>
-                </div>
-                <div class="col-md-10">
-                    <p>@Model.Project.Name</p>
-                </div>
+        <div class="row mt-2">
+            <div class="col-md-2">
+                <label class="float-right">Телефон:</label>
+            </div>
+            <div class="col-md-10">
+                <p>@Model.Phone</p>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-2">
+                <label class="float-right">Роль:</label>
+            </div>
+            <div class="col-md-10">
+                <p>@Model.Role</p>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-2">
+                <label class="float-right">Проект:</label>
+            </div>
+            <div class="col-md-10">
+                <p>@Model.Project.Name</p>
             </div>
         </div>
     </div>
+</div>
