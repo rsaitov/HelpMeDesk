@@ -21,11 +21,11 @@
             {
             <tr>
                 <th scope="row">@user.Id</th>
-                <td><a asp-controller="User" asp-route-id="@user.Id">@user.Email</a></td>
+                <td><a asp-controller="User" asp-action="Detail" asp-route-id="@user.Id">@user.Email</a></td>
                 <td>@user.Name</td>
                 <td>@user.Phone</td>
                 <td>@user.Role</td>
-                <td><a asp-controller="Project" asp-route-id="@user.Project.Id">@user.Project.Name</a></td>
+                <td><a asp-controller="Project" asp-action="Detail" asp-route-id="@user.Project.Id">@user.Project.Name</a></td>
             </tr>
             }
         </tbody>

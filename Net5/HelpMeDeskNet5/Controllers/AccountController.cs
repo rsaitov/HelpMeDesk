@@ -45,7 +45,7 @@ namespace HelpMeDeskNet5.Controllers
                 }
 
                 await Authenticate(model.Email);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Ticket");
             }
 
             return View(model);

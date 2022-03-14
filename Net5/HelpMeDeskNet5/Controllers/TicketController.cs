@@ -22,33 +22,34 @@ namespace HelpMeDeskNet5.Controllers
             _service = service;
             _mapper = mapper;
         }
-        //[Route("Ticket")]
-        public IActionResult Index(int? id)
+        [Route("")]
+        [Route("Ticket")]
+        public IActionResult Index()
         {
-            if (id == null)
+            var currentUser = GetCurrentUser();
+            if (currentUser == null)
+                return StatusCode(401);
+
+            var tickets = _service.GetAllTickets().OrderByDescending(x => x.Id);
+            List<TicketDTO> filteredTickets = null;
+
+            if (currentUser.Role == UserRole.User)
+                filteredTickets = tickets.Where(x => x.AuthorId == currentUser.Id).ToList();
+            if (currentUser.Role == UserRole.Executor)
+                filteredTickets = tickets.Where(x => x.ProjectId == currentUser.ProjectId).ToList();
+
+            var model = new TicketListViewModel
             {
-                var currentUser = GetCurrentUser();
-                if (currentUser == null)
-                    return StatusCode(401);
+                Tickets = filteredTickets ?? tickets.ToList()
+            };
 
-                var tickets = _service.GetAllTickets().OrderByDescending(x => x.Id);
-                List<TicketDTO> filteredTickets = null;
+            return View(model);
+        }
 
-                if (currentUser.Role == UserRole.User)
-                    filteredTickets = tickets.Where(x => x.AuthorId == currentUser.Id).ToList();
-                if (currentUser.Role == UserRole.Executor)
-                    filteredTickets = tickets.Where(x => x.ProjectId == currentUser.ProjectId).ToList();
-
-                var model = new TicketListViewModel
-                {
-                    Tickets = filteredTickets ?? tickets.ToList()
-                };
-
-                return View(model);
-            }
-
+        public IActionResult Detail(int id)
+        {
             var viewModel = ConstructTicketViewModel(id);
-            return View("Detail", viewModel);
+            return View(viewModel);
         }
 
         //GET - EDIT

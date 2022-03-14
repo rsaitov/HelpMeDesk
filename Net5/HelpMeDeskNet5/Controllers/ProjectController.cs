@@ -17,14 +17,13 @@ namespace HelpMeDeskNet5.Controllers
         {
             _service = service;
         }
-        public IActionResult Index(int? id)
+        public IActionResult Index()
         {
-            if (id == null)
-            {
-                var viewModel = new ProjectListViewModel(_service.GetAllProjects());
-                return View(viewModel);
-            }
-
+            var viewModel = new ProjectListViewModel(_service.GetAllProjects());
+            return View(viewModel);
+        }
+        public IActionResult Detail(int id)
+        {
             var user = _service.GetProject((int)id);
             return View("Detail", user);
         }

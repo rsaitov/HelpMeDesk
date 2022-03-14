@@ -15,12 +15,12 @@ namespace HelpMeDeskNet5.Controllers
         }
         public IActionResult Index(int? id)
         {
-            if (id == null)
-            {
-                var viewModel = new UserListViewModel(_service.GetAllUsers());
-                return View(viewModel);
-            }
+            var viewModel = new UserListViewModel(_service.GetAllUsers());
+            return View(viewModel);
 
+        }
+        public IActionResult Detail(int id)
+        {
             var user = _service.GetUser((int)id);
             return View("Detail", user);
         }
