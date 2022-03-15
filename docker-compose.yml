@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ms-sql-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Q123456!"
+      MSSQL_PID: Express
+    ports: 
+      - "11433:1433"
+  helpmedesk:
+    build: .
+    environment:
+      DatabaseServer: "ms-sql-server"
+      DatabasePort: "1433"
+      DatabaseUser: "SA"
+      DatabasePassword: "Q123456!"
+      DatabaseName: "HelpMeDesk_1"
+    ports: 
+      - "8080:80"
+    depends_on:
+      - ms-sql-server

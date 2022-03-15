@@ -42,8 +42,18 @@ namespace HelpMeDeskNet5
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            var server = Configuration["DatabaseServer"] ?? "localhost";
+            var port = Configuration["DatabasePort"] ?? "11433";
+            var user = Configuration["DatabaseUser"] ?? "SA";
+            var password = Configuration["DatabasePassword"] ?? "Q123456!";
+            var database = Configuration["DatabaseName"] ?? "HelpMeDesk_1";
+
+            var connectionString = $"Server={server}{(port=="" ? "" : "," + port)}; Initial Catalog={database}; User ID={user}; Password={password}";
+            var configurationConnectionString = Configuration.GetConnectionString("HelpMeDeskContext");
+
+            Console.WriteLine($"Connection string is: {connectionString}");
             services.AddDbContext<HelpMeDeskContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("HelpMeDeskContext")));
+                    options.UseSqlServer(connectionString));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

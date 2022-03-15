@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,15 @@ namespace Data
 {
     public class SeedData
     {
-        private static List<ProjectDTO> _projects = new List<ProjectDTO>
-        {
-
-        };
         public static void Initial(HelpMeDeskContext context)
         {
+            Console.WriteLine("Applying Migrations...");
+            context.Database.Migrate();
+
             if (!context.TicketStatus.Any())
             {
+                Console.WriteLine("Addding data - seeding...");
+
                 context.TicketStatus.AddRange(
                     new TicketStatusDTO("New"),
                     new TicketStatusDTO("In progress"),
@@ -23,6 +25,8 @@ namespace Data
                     new TicketStatusDTO("Solved")
                 );
             }
+            else
+                Console.WriteLine("Already have data - not seeding");
 
             if (!context.Project.Any())
             {
